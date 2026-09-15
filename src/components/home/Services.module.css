@@ -1,0 +1,558 @@
+/* ==========================================================================
+   PARTHAV TECHNOLOGIES — SERVICES CAROUSEL & CAPABILITIES
+   Pure CSS Module — 4-Card Horizontal Desktop Layout
+   ========================================================================== */
+
+.servicesSection {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-white);
+  padding-top: clamp(64px, 8vw, 100px);
+  padding-bottom: clamp(64px, 8vw, 96px);
+  overflow: hidden;
+}
+
+.carouselRoot {
+  position: relative;
+  outline: none;
+}
+
+.carouselRoot:focus-visible {
+  outline: 2px solid rgba(255, 106, 0, 0.4);
+  outline-offset: 4px;
+  border-radius: var(--radius-md);
+}
+
+/* ========================================================
+   HEADER ROW
+   ======================================================== */
+.headerRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-bottom: clamp(36px, 4.5vw, 52px);
+}
+
+@media (min-width: 1024px) {
+  .headerRow {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-8);
+  }
+}
+
+.headerLeft {
+  max-width: 640px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-orange);
+  margin-bottom: var(--space-2);
+}
+
+.headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.125rem, 3.4vw, 3.125rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--color-navy);
+  margin-bottom: var(--space-3);
+}
+
+.headlineBreak {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .headlineBreak {
+    display: inline;
+  }
+}
+
+.orangeText {
+  color: var(--color-orange);
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  max-width: 520px;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding-bottom: 4px;
+}
+
+@media (min-width: 1024px) {
+  .headerRight {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-5);
+  }
+}
+
+/* Position counter */
+.counterContainer {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+}
+
+.activeNumber {
+  font-weight: 800;
+  color: var(--color-orange);
+}
+
+.counterDivider {
+  color: rgba(6, 43, 87, 0.25);
+  font-size: 0.875rem;
+}
+
+.totalNumber {
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+/* Arrow controls */
+.arrowControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.carouselArrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--color-orange);
+  background-color: rgba(255, 106, 0, 0.04);
+  color: var(--color-orange);
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 200ms ease, color 200ms ease,
+    transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.carouselArrow:hover:not(:disabled) {
+  background-color: var(--color-orange);
+  color: var(--color-white);
+  box-shadow: 0 6px 18px rgba(255, 106, 0, 0.28);
+}
+
+.carouselArrow:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.carouselArrow:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 2px;
+}
+
+.carouselArrow svg {
+  transition: transform 200ms ease;
+}
+
+.arrowControls .carouselArrow:first-child:hover:not(:disabled) svg {
+  transform: translateX(-2px);
+}
+
+.arrowControls .carouselArrow:last-child:hover:not(:disabled) svg {
+  transform: translateX(2px);
+}
+
+.carouselArrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ========================================================
+   CAROUSEL VIEWPORT / TRACK
+   Strictly overflow: hidden — BODY NEVER HORIZONTALLY SCROLLS
+   ======================================================== */
+.carouselViewport {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  touch-action: pan-y;
+  padding-block: 8px 12px;
+  margin-block: -8px -12px;
+}
+
+.carouselTrack {
+  display: flex;
+  gap: 20px;
+  will-change: transform;
+  user-select: none;
+}
+
+/* ========================================================
+   RESPONSIVE SLIDE WIDTHS
+   Desktop (1280px+): EXACTLY 4 CARDS
+   Wide Tablet (1024px-1279px): 3 CARDS
+   Tablet (768px-1023px): 2 CARDS
+   Mobile (<=767px): 1 CARD + 20px glimpse
+   ======================================================== */
+.slideWrapper {
+  flex-shrink: 0;
+  width: calc((100% - 3 * 20px) / 4);
+}
+
+@media (max-width: 1279px) and (min-width: 1024px) {
+  .slideWrapper {
+    width: calc((100% - 2 * 20px) / 3);
+  }
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  .slideWrapper {
+    width: calc((100% - 20px) / 2);
+  }
+}
+
+@media (max-width: 767px) {
+  .slideWrapper {
+    width: calc(100% - 36px);
+  }
+
+  .carouselTrack {
+    gap: 16px;
+  }
+}
+
+/* ========================================================
+   SERVICE CARD
+   ======================================================== */
+.serviceCard {
+  position: relative;
+  height: 100%;
+  background-color: var(--color-white);
+  border: 1px solid rgba(6, 43, 87, 0.10);
+  border-radius: 20px;
+  padding: 30px 26px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(3, 27, 58, 0.04);
+  transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -8px rgba(3, 27, 58, 0.10);
+  border-color: rgba(255, 106, 0, 0.28);
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.cardNumber {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #66758A;
+  background-color: rgba(6, 43, 87, 0.05);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  letter-spacing: 0.04em;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background-color: rgba(6, 43, 87, 0.04);
+  color: var(--color-navy);
+  transition: transform 220ms ease, background-color 220ms ease, color 220ms ease;
+}
+
+.serviceCard:hover .iconContainer {
+  transform: translateY(-1px);
+  background-color: rgba(255, 106, 0, 0.08);
+  color: var(--color-orange);
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.1875rem, 1.25vw, 1.3125rem);
+  font-weight: 700;
+  color: var(--color-navy);
+  line-height: 1.28;
+  letter-spacing: -0.015em;
+  margin-bottom: var(--space-3);
+  word-break: break-word;
+}
+
+.cardDescription {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.capabilityList {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+  margin-bottom: var(--space-5);
+  padding: 0;
+}
+
+.capabilityPill {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  background-color: rgba(6, 43, 87, 0.04);
+  padding: 5px 11px;
+  border-radius: 9999px;
+  letter-spacing: 0.01em;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(6, 43, 87, 0.06);
+  padding-top: var(--space-4);
+  margin-top: auto;
+}
+
+.exploreCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-heading);
+  font-size: 0.84375rem;
+  font-weight: 700;
+  color: var(--color-orange);
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.exploreCta:hover {
+  color: var(--color-orange-light);
+}
+
+.exploreArrow {
+  transition: transform 200ms ease;
+}
+
+.serviceCard:hover .exploreArrow {
+  transform: translateX(4px);
+}
+
+/* ========================================================
+   ADDITIONAL CAPABILITIES
+   ======================================================== */
+.capabilitiesBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-top: clamp(36px, 5vw, 56px);
+}
+
+.capabilitiesLabel {
+  font-family: var(--font-heading);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #7A899B;
+}
+
+.chipsRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  transition: all var(--transition-fast);
+}
+
+.chip:hover {
+  border-color: var(--color-orange);
+  color: var(--color-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(3, 27, 58, 0.06);
+}
+
+.chipIcon {
+  color: var(--color-orange);
+}
+
+/* ========================================================
+   VIEW ALL SERVICES
+   ======================================================== */
+.viewAllRow {
+  display: flex;
+  justify-content: center;
+  padding-top: clamp(32px, 4vw, 48px);
+}
+
+.viewAllLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 9999px;
+  border: 1px solid rgba(6, 43, 87, 0.12);
+  background-color: var(--color-white);
+  transition: color 200ms ease, border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+}
+
+.viewAllLink:hover {
+  color: var(--color-orange);
+  border-color: var(--color-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(3, 27, 58, 0.06);
+}
+
+.viewAllArrow {
+  transition: transform 200ms ease;
+}
+
+.viewAllLink:hover .viewAllArrow {
+  transform: translateX(4px);
+}
+
+/* ========================================================
+   MOBILE REFINEMENTS
+   ======================================================== */
+@media (max-width: 767px) {
+  .servicesSection {
+    padding-top: 56px;
+    padding-bottom: 64px;
+  }
+
+  .headerRow {
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  .headerRight {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: var(--space-2);
+  }
+
+  .carouselArrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  .serviceCard {
+    padding: 22px 20px 20px;
+    border-radius: 18px;
+  }
+
+  .cardTitle {
+    font-size: 1.1875rem;
+    margin-bottom: var(--space-2);
+  }
+
+  .cardDescription {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: var(--space-3);
+  }
+
+  .capabilitiesBox {
+    gap: var(--space-2);
+    padding-top: 32px;
+  }
+
+  .chipsRow {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+    padding-top: 2px;
+    margin-inline: -16px;
+    padding-inline: 16px;
+    scrollbar-width: none;
+  }
+
+  .chipsRow::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chip {
+    flex-shrink: 0;
+    padding: 7px 14px;
+    font-size: 0.75rem;
+  }
+}
+
+/* ========================================================
+   REDUCED MOTION
+   ======================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .carouselTrack,
+  .carouselArrow,
+  .serviceCard,
+  .exploreArrow,
+  .viewAllArrow,
+  .iconContainer {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+

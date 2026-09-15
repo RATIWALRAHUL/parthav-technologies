@@ -1,0 +1,153 @@
+/* ==========================================================================
+   ANIMATION FOUNDATION
+   ========================================================================== */
+
+:root {
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Keyframes */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes imageReveal {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Reusable Animation Classes */
+.animate-fade-up {
+  animation: fadeUp 600ms var(--ease-spring) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 500ms ease forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 500ms var(--ease-spring) forwards;
+}
+
+.animate-image-reveal {
+  animation: imageReveal 700ms var(--ease-spring) forwards;
+}
+
+/* Stagger Helpers */
+.stagger-1 { animation-delay: 100ms; }
+.stagger-2 { animation-delay: 200ms; }
+.stagger-3 { animation-delay: 300ms; }
+.stagger-4 { animation-delay: 400ms; }
+
+/* Micro-interaction helpers */
+.hover-lift {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+/* Animated Underline for Text Links */
+.animated-link {
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.animated-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-orange);
+  transition: width 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 9999px;
+}
+
+.animated-link:hover::after {
+  width: 100%;
+}
+
+/* Primary Button Motion */
+.btn-motion {
+  display: inline-flex;
+  align-items: center;
+  transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
+  user-select: none;
+}
+
+.btn-motion:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 106, 0, 0.28);
+}
+
+.btn-motion:active {
+  transform: scale(0.97);
+}
+
+.btn-motion svg {
+  transition: transform 200ms ease;
+}
+
+.btn-motion:hover svg {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   REDUCED MOTION SUPPORT (WCAG 2.1 AA)
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-fade-up,
+  .animate-fade-in,
+  .animate-scale-in,
+  .animate-image-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}

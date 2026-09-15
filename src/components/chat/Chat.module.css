@@ -1,0 +1,1563 @@
+/* ============================================================
+   PARTHAV TECHNOLOGIES — FLOATING AI CHATBOT SYSTEM (2026)
+   PURE CSS MODULE — NO TAILWIND / NO BOOTSTRAP
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. GLOBAL FLOATING FAB & TOOLTIP
+   ------------------------------------------------------------ */
+
+.widgetContainer {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9990;
+  font-family: var(--font-body, "Inter", sans-serif);
+}
+
+.fabContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.fabButton {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF7A00 0%, #FF6A00 100%);
+  border: none;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(255, 106, 0, 0.38), 0 4px 12px rgba(3, 27, 58, 0.16);
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 200ms ease;
+  position: relative;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fabButton:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 14px 34px rgba(255, 106, 0, 0.46), 0 6px 16px rgba(3, 27, 58, 0.20);
+}
+
+.fabButton:active {
+  transform: scale(0.96);
+}
+
+.fabButton:focus-visible {
+  outline: 3px solid rgba(255, 106, 0, 0.5);
+  outline-offset: 3px;
+}
+
+.fabIcon {
+  color: #FFFFFF;
+  transition: transform 200ms ease;
+}
+
+.fabNotificationDot {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #EF4444;
+  border: 2.5px solid #FFFFFF;
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.7);
+}
+
+/* Tooltip */
+.fabTooltip {
+  position: absolute;
+  bottom: 74px;
+  right: 0;
+  background-color: #FFFFFF;
+  border-radius: 14px;
+  padding: 10px 16px 10px 14px;
+  box-shadow: 0 12px 32px rgba(3, 27, 58, 0.14), 0 2px 8px rgba(3, 27, 58, 0.06);
+  border: 1px solid rgba(6, 43, 87, 0.08);
+  white-space: nowrap;
+  cursor: pointer;
+  animation: tooltipSlideUp 300ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  z-index: 10;
+}
+
+@keyframes tooltipSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tooltipHeading {
+  font-family: var(--font-heading, "Manrope", sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #031B3A;
+  line-height: 1.2;
+}
+
+.tooltipSubtitle {
+  font-size: 0.78rem;
+  color: #66758A;
+  margin-top: 2px;
+}
+
+.tooltipCloseBtn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: transparent;
+  border: none;
+  color: #94A3B8;
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.tooltipCloseBtn:hover {
+  color: #031B3A;
+  background-color: #F1F5F9;
+}
+
+.tooltipArrow {
+  position: absolute;
+  bottom: -6px;
+  right: 24px;
+  width: 12px;
+  height: 6px;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+  background-color: #FFFFFF;
+}
+
+/* ------------------------------------------------------------
+   2. DESKTOP CHAT WINDOW
+   ------------------------------------------------------------ */
+
+.chatWindowDesktop {
+  position: fixed;
+  bottom: 96px;
+  right: 24px;
+  width: 395px;
+  max-width: calc(100vw - 48px);
+  height: 640px;
+  max-height: calc(100vh - 120px);
+  background-color: #FFFFFF;
+  border-radius: 22px;
+  box-shadow: 0 24px 64px rgba(3, 27, 58, 0.18), 0 4px 16px rgba(3, 27, 58, 0.08);
+  border: 1px solid rgba(6, 43, 87, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9990;
+  animation: windowOpenDesktop 320ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes windowOpenDesktop {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ------------------------------------------------------------
+   3. MOBILE CHAT BOTTOM SHEET
+   ------------------------------------------------------------ */
+
+.mobileBackdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(3, 27, 58, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 9989;
+  animation: fadeIn 280ms ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.chatWindowMobile {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: min(92vh, 760px);
+  background-color: #FFFFFF;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  box-shadow: 0 -12px 48px rgba(3, 27, 58, 0.22);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9990;
+  animation: bottomSheetSlideUp 350ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@keyframes bottomSheetSlideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.mobileDragHandleWrapper {
+  width: 100%;
+  height: 20px;
+  background-color: #031B3A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.mobileDragHandle {
+  width: 38px;
+  height: 4.5px;
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 3px;
+}
+
+/* ------------------------------------------------------------
+   4. CHAT HEADER
+   ------------------------------------------------------------ */
+
+.chatHeader {
+  background: linear-gradient(135deg, #031B3A 0%, #062B57 100%);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #FFFFFF;
+  position: relative;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.headerContourGlow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 100%;
+  background: radial-gradient(circle at 100% 0%, rgba(255, 106, 0, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.headerIdentity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.headerTextGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.headerTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.headerName {
+  font-family: var(--font-heading, "Manrope", sans-serif);
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+
+.headerOnlineDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #22C55E;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.8);
+}
+
+.headerSubtitle {
+  font-size: 0.74rem;
+  color: #AFC0D6;
+  margin-top: 2px;
+}
+
+.headerControls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  z-index: 2;
+}
+
+.headerIconBtn {
+  background: transparent;
+  border: none;
+  color: #CBD5E1;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.headerIconBtn:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+}
+
+/* Dropdown Menu */
+.headerMenuWrapper {
+  position: relative;
+}
+
+.headerDropdownMenu {
+  position: absolute;
+  top: 38px;
+  right: 0;
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(3, 27, 58, 0.18);
+  border: 1px solid rgba(6, 43, 87, 0.08);
+  width: 220px;
+  padding: 6px;
+  z-index: 100;
+  animation: dropdownIn 180ms ease forwards;
+}
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdownMenuItem {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  color: #10243E;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 150ms ease;
+}
+
+.dropdownMenuItem:hover {
+  background-color: #F1F5F9;
+  color: #FF6A00;
+}
+
+/* ------------------------------------------------------------
+   5. CHAT SCROLL AREA
+   ------------------------------------------------------------ */
+
+.chatScrollArea {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background-color: #F8FAFC;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+/* Custom minimal scrollbar */
+.chatScrollArea::-webkit-scrollbar {
+  width: 5px;
+}
+
+.chatScrollArea::-webkit-scrollbar-thumb {
+  background: rgba(6, 43, 87, 0.12);
+  border-radius: 10px;
+}
+
+/* Welcome Box */
+.welcomeContainer {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  padding: 14px 16px;
+  border: 1px solid rgba(6, 43, 87, 0.06);
+  box-shadow: 0 2px 10px rgba(3, 27, 58, 0.04);
+}
+
+.welcomeBotRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.welcomeBubble {
+  flex: 1;
+}
+
+.welcomeHeading {
+  font-family: var(--font-heading, "Manrope", sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #031B3A;
+}
+
+.welcomeSub {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #10243E;
+  margin-top: 2px;
+}
+
+.welcomeSupportingText {
+  font-size: 0.78rem;
+  color: #66758A;
+  margin-top: 8px;
+  margin-left: 48px;
+}
+
+/* ------------------------------------------------------------
+   6. QUICK ACTIONS
+   ------------------------------------------------------------ */
+
+.quickActionsSection {
+  margin-top: 2px;
+}
+
+/* Desktop 2-column Grid */
+.quickActionsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.quickActionCard {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(6, 43, 87, 0.08);
+  border-radius: 14px;
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 180ms ease;
+  box-shadow: 0 2px 6px rgba(3, 27, 58, 0.03);
+}
+
+.quickActionCard:hover {
+  transform: translateY(-1.5px);
+  border-color: rgba(255, 106, 0, 0.35);
+  box-shadow: 0 6px 18px rgba(3, 27, 58, 0.08);
+}
+
+/* Mobile Stacked List */
+.quickActionsMobileList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quickActionMobileItem {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(6, 43, 87, 0.08);
+  border-radius: 14px;
+  padding: 12px 14px;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  text-align: left;
+  box-shadow: 0 2px 6px rgba(3, 27, 58, 0.03);
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.quickActionMobileItem:active {
+  background-color: #F1F5F9;
+  border-color: #FF6A00;
+}
+
+/* Icon Badges */
+.actionIconContainer {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.iconBgBlue {
+  background-color: #EAF4FF;
+  color: #0284C7;
+}
+
+.iconBgNavy {
+  background-color: rgba(6, 43, 87, 0.08);
+  color: #062B57;
+}
+
+.iconBgOrange {
+  background-color: #FFF2E8;
+  color: #FF6A00;
+}
+
+.actionTextCol {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.actionTitle {
+  font-family: var(--font-heading, "Manrope", sans-serif);
+  font-size: 0.81rem;
+  font-weight: 700;
+  color: #031B3A;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actionDescription {
+  font-size: 0.70rem;
+  color: #66758A;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+
+.actionChevron {
+  color: #94A3B8;
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+}
+
+.quickActionCard:hover .actionChevron,
+.quickActionMobileItem:hover .actionChevron {
+  color: #FF6A00;
+  transform: translateX(2px);
+}
+
+/* ------------------------------------------------------------
+   7. CHAT MESSAGES & BUBBLES
+   ------------------------------------------------------------ */
+
+.messagesList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.messageRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  animation: messageFadeIn 220ms ease forwards;
+}
+
+@keyframes messageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.messageRowUser {
+  justify-content: flex-end;
+}
+
+.messageRowAssistant {
+  justify-content: flex-start;
+}
+
+.messageAvatarCol {
+  flex-shrink: 0;
+  margin-bottom: 2px;
+}
+
+.messageBubbleWrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 82%;
+}
+
+.messageBubble {
+  padding: 10px 14px;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.messageBubbleUser {
+  background-color: #062B57;
+  color: #FFFFFF;
+  border-radius: 18px 18px 4px 18px;
+  box-shadow: 0 4px 12px rgba(6, 43, 87, 0.15);
+}
+
+.messageBubbleAssistant {
+  background-color: #F0F6FD;
+  color: #031B3A;
+  border-radius: 18px 18px 18px 4px;
+  border: 1px solid rgba(6, 43, 87, 0.06);
+}
+
+.messageText {
+  white-space: pre-wrap;
+}
+
+.messageActionBtnWrapper {
+  margin-top: 8px;
+}
+
+.messageLinkBtn {
+  display: inline-flex;
+  align-items: center;
+  background-color: #FFFFFF;
+  color: #FF6A00;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 106, 0, 0.25);
+  box-shadow: 0 2px 6px rgba(3, 27, 58, 0.04);
+  transition: background-color 150ms ease;
+}
+
+.messageLinkBtn:hover {
+  background-color: #FFF2E8;
+}
+
+.messageMeta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.68rem;
+  color: #94A3B8;
+  margin-top: 3px;
+}
+
+.messageMetaUser {
+  justify-content: flex-end;
+}
+
+.messageMetaAssistant {
+  justify-content: flex-start;
+  margin-left: 4px;
+}
+
+.readReceiptIcon {
+  color: #38BDF8;
+}
+
+.userAvatarIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-bottom: 2px;
+}
+
+/* ------------------------------------------------------------
+   8. TYPING INDICATOR
+   ------------------------------------------------------------ */
+
+.typingContainer {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.typingBubble {
+  background-color: #F0F6FD;
+  border: 1px solid rgba(6, 43, 87, 0.06);
+  border-radius: 16px 16px 16px 4px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.typingDot {
+  width: 6.5px;
+  height: 6.5px;
+  border-radius: 50%;
+  background-color: #062B57;
+  animation: typingBounce 1200ms infinite ease-in-out;
+}
+
+@keyframes typingBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-5px);
+    opacity: 1;
+    background-color: #FF6A00;
+  }
+}
+
+/* ------------------------------------------------------------
+   9. FLOW CARDS (LEAD QUALIFICATION / FAQ / HUMAN / SUCCESS)
+   ------------------------------------------------------------ */
+
+.flowCardWrapper {
+  animation: flowIn 250ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes flowIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Lead Flow Card */
+.leadFlowCard {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid rgba(6, 43, 87, 0.10);
+  box-shadow: 0 6px 20px rgba(3, 27, 58, 0.06);
+}
+
+.leadFlowHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.leadFlowTitleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.leadFlowSparkle {
+  color: #FF6A00;
+}
+
+.leadFlowTitle {
+  font-family: var(--font-heading, "Manrope", sans-serif);
+  font-size: 0.90rem;
+  font-weight: 700;
+  color: #031B3A;
+}
+
+.leadFlowStepBadge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  background-color: #EAF4FF;
+  color: #0284C7;
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+
+.leadProgressBar {
+  width: 100%;
+  height: 4px;
+  background-color: #F1F5F9;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.leadProgressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF7A00, #FF6A00);
+  transition: width 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.leadStepQuestion {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #10243E;
+  margin-bottom: 10px;
+}
+
+.leadPillsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.leadPill {
+  background-color: #F8FAFC;
+  border: 1px solid rgba(6, 43, 87, 0.10);
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  color: #10243E;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 150ms ease;
+}
+
+.leadPill:hover {
+  border-color: #FF6A00;
+  background-color: #FFF2E8;
+}
+
+.leadPillSelected {
+  background-color: #062B57;
+  color: #FFFFFF;
+  border-color: #062B57;
+}
+
+.pillCheck {
+  color: #FF6A00;
+}
+
+.leadTextarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(6, 43, 87, 0.15);
+  padding: 10px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  resize: vertical;
+  outline: none;
+  background-color: #F8FAFC;
+}
+
+.leadTextarea:focus {
+  border-color: #FF6A00;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(255, 106, 0, 0.12);
+}
+
+.leadOptionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.leadOptionRow {
+  background-color: #F8FAFC;
+  border: 1px solid rgba(6, 43, 87, 0.10);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  color: #10243E;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.leadOptionRow:hover {
+  background-color: #FFF2E8;
+  border-color: #FF6A00;
+}
+
+.leadOptionRowSelected {
+  background-color: #062B57;
+  color: #FFFFFF;
+  border-color: #062B57;
+}
+
+.leadInputsStack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.leadInputLabel {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #66758A;
+  margin-bottom: 4px;
+}
+
+.leadInput {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(6, 43, 87, 0.15);
+  padding: 8px 12px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  background-color: #F8FAFC;
+  outline: none;
+}
+
+.leadInput:focus {
+  border-color: #FF6A00;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(255, 106, 0, 0.12);
+}
+
+.leadError {
+  font-size: 0.72rem;
+  color: #DC2626;
+  margin-top: 4px;
+}
+
+.leadFlowFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid #F1F5F9;
+}
+
+.leadCancelBtn {
+  background: transparent;
+  border: none;
+  font-size: 0.78rem;
+  color: #94A3B8;
+  cursor: pointer;
+}
+
+.leadCancelBtn:hover {
+  color: #031B3A;
+}
+
+.leadFlowFooterRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.leadBackBtn {
+  background: #F1F5F9;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  color: #475569;
+  cursor: pointer;
+}
+
+.leadNextBtn {
+  background-color: #FF6A00;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.80rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.leadNextBtn:hover {
+  background-color: #E05D00;
+}
+
+.leadNextBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* FAQ Browser */
+.faqFlowContainer {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  padding: 14px;
+  border: 1px solid rgba(6, 43, 87, 0.10);
+  box-shadow: 0 4px 16px rgba(3, 27, 58, 0.05);
+}
+
+.faqFlowHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.faqIconAccent {
+  color: #0284C7;
+}
+
+.faqFlowTitle {
+  font-family: var(--font-heading, "Manrope", sans-serif);
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #031B3A;
+}
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.faqItemBtn {
+  background-color: #F8FAFC;
+  border: 1px solid rgba(6, 43, 87, 0.06);
+  border-radius: 10px;
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-align: left;
+  transition: all 150ms ease;
+}
+
+.faqItemBtn:hover {
+  background-color: #EAF4FF;
+  border-color: #0284C7;
+}
+
+.faqQuestionText {
+  font-size: 0.80rem;
+  font-weight: 600;
+  color: #10243E;
+  padding-right: 8px;
+}
+
+.faqChevron {
+  color: #94A3B8;
+  flex-shrink: 0;
+}
+
+/* Human Support Card */
+.humanSupportCard {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid rgba(6, 43, 87, 0.10);
+  box-shadow: 0 4px 16px rgba(3, 27, 58, 0.05);
+}
+
+.humanSupportBadge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #FF6A00;
+  background-color: #FFF2E8;
+  padding: 2px 8px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+}
+
+.humanSupportTitle {
+  font-family: var(--font-heading, "Manrope", sans-serif);
+  font-size: 0.90rem;
+  font-weight: 700;
+  color: #031B3A;
+  margin: 0;
+}
+
+.humanSupportSubtitle {
+  font-size: 0.74rem;
+  color: #66758A;
+  margin: 4px 0 12px 0;
+}
+
+.humanChannelsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.humanChannelRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background-color: #F8FAFC;
+  border: 1px solid rgba(6, 43, 87, 0.06);
+  text-decoration: none;
+  transition: all 150ms ease;
+}
+
+.humanChannelRow:hover {
+  background-color: #F1F5F9;
+  border-color: #FF6A00;
+}
+
+.humanChannelIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.humanChannelInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.humanChannelLabel {
+  font-size: 0.72rem;
+  color: #66758A;
+}
+
+.humanChannelValue {
+  font-size: 0.80rem;
+  font-weight: 600;
+  color: #031B3A;
+}
+
+.humanChannelArrow {
+  color: #94A3B8;
+}
+
+.humanMetaDetails {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #F1F5F9;
+}
+
+.humanMetaItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: #66758A;
+}
+
+.humanMetaIcon {
+  color: #94A3B8;
+}
+
+.humanActionRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.humanFullContactLink {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #FF6A00;
+  text-decoration: none;
+}
+
+.humanBackBtn {
+  background: transparent;
+  border: none;
+  font-size: 0.76rem;
+  color: #66758A;
+  cursor: pointer;
+}
+
+/* Success Card */
+.successCard {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  padding: 20px 16px;
+  border: 1px solid rgba(6, 43, 87, 0.10);
+  box-shadow: 0 4px 16px rgba(3, 27, 58, 0.05);
+  text-align: center;
+}
+
+.successIconWrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #DCFCE7;
+  color: #16A34A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px auto;
+}
+
+.successTitle {
+  font-family: var(--font-heading, "Manrope", sans-serif);
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: #031B3A;
+  margin: 0 0 6px 0;
+}
+
+.successSubtitle {
+  font-size: 0.78rem;
+  color: #66758A;
+  margin: 0 0 14px 0;
+  line-height: 1.45;
+}
+
+.successRefBadge {
+  display: inline-block;
+  background-color: #F1F5F9;
+  color: #062B57;
+  font-size: 0.76rem;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+
+.successBackBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #062B57;
+  color: #FFFFFF;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 0.80rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.successBackBtn:hover {
+  background-color: #031B3A;
+}
+
+/* ------------------------------------------------------------
+   10. SCROLL TO BOTTOM BUTTON
+   ------------------------------------------------------------ */
+
+.scrollToBottomBtn {
+  position: absolute;
+  bottom: 84px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #031B3A;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 4px 14px rgba(3, 27, 58, 0.25);
+  cursor: pointer;
+  z-index: 10;
+  animation: popIn 200ms ease forwards;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: translate(-50%, 6px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* ------------------------------------------------------------
+   11. COMPOSER FOOTER
+   ------------------------------------------------------------ */
+
+.composerWrapper {
+  background-color: #FFFFFF;
+  border-top: 1px solid rgba(6, 43, 87, 0.08);
+  padding: 10px 14px 8px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.composerInnerRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #F8FAFC;
+  border: 1px solid rgba(6, 43, 87, 0.10);
+  border-radius: 26px;
+  padding: 4px 5px 4px 10px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.composerInnerRow:focus-within {
+  border-color: #FF6A00;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(255, 106, 0, 0.12);
+}
+
+.composerAttachmentBtn {
+  background: transparent;
+  border: none;
+  color: #64748B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: color 150ms ease;
+}
+
+.composerAttachmentBtn:hover {
+  color: #031B3A;
+}
+
+.composerInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.84rem;
+  color: #031B3A;
+  outline: none;
+  padding: 6px 0;
+}
+
+.composerInput::placeholder {
+  color: #94A3B8;
+}
+
+.composerSendBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF7A00 0%, #FF6A00 100%);
+  border: none;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 106, 0, 0.35);
+  transition: transform 150ms ease, opacity 150ms ease;
+  flex-shrink: 0;
+}
+
+.composerSendBtn:hover:not(:disabled) {
+  transform: scale(1.06);
+}
+
+.composerSendBtn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.composerSendBtnDisabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.sendIconSvg {
+  transform: translateX(1px);
+}
+
+.composerBrandingRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 0.68rem;
+  color: #94A3B8;
+  padding-bottom: 2px;
+}
+
+.composerBrandingBolt {
+  color: #FF6A00;
+  font-size: 0.72rem;
+}
+
+.composerBrandingText {
+  letter-spacing: 0.01em;
+}
+
+/* ------------------------------------------------------------
+   12. MINIMIZED VIEW
+   ------------------------------------------------------------ */
+
+.minimizedBar {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 280px;
+  height: 58px;
+  background-color: #FFFFFF;
+  border-radius: 29px;
+  box-shadow: 0 12px 36px rgba(3, 27, 58, 0.16), 0 2px 8px rgba(3, 27, 58, 0.06);
+  border: 1px solid rgba(6, 43, 87, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px 6px 8px;
+  cursor: pointer;
+  z-index: 9990;
+  animation: minBarIn 250ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+@keyframes minBarIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.minimizedBar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 42px rgba(3, 27, 58, 0.22);
+}
+
+.minimizedLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.minimizedTextCol {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.minimizedTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.minimizedTitle {
+  font-family: var(--font-heading, "Manrope", sans-serif);
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #031B3A;
+  white-space: nowrap;
+}
+
+.minimizedGreenDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #22C55E;
+}
+
+.minimizedSubtitle {
+  font-size: 0.70rem;
+  color: #66758A;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.minimizedExpandBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #F1F5F9;
+  color: #031B3A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 150ms ease;
+}
+
+.minimizedBar:hover .minimizedExpandBtn {
+  background-color: #EAF4FF;
+  color: #FF6A00;
+}
+
+/* ------------------------------------------------------------
+   13. RESPONSIVE BREAKPOINTS & ACCESSIBILITY
+   ------------------------------------------------------------ */
+
+@media (max-width: 767px) {
+  .widgetContainer {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .fabButton {
+    width: 56px;
+    height: 56px;
+  }
+
+  .minimizedBar {
+    bottom: 20px;
+    right: 20px;
+    width: calc(100vw - 40px);
+    max-width: 360px;
+  }
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .chatWindowDesktop,
+  .chatWindowMobile,
+  .fabTooltip,
+  .minimizedBar,
+  .messageRow,
+  .flowCardWrapper,
+  .leadProgressFill,
+  .mobileBackdrop {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .typingDot {
+    animation: none !important;
+    opacity: 0.7;
+  }
+
+  .fabButton:hover {
+    transform: none !important;
+  }
+}

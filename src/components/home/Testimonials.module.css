@@ -1,0 +1,187 @@
+.testimonialsCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  display: inline-flex;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-orange);
+  margin-bottom: var(--space-2);
+}
+
+.headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 800;
+  color: var(--color-navy);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: var(--space-6);
+  /* Matches FAQ's two-line headline height so both cards start at the same row */
+  min-height: calc(clamp(2rem, 3.2vw, 2.75rem) * 2.4);
+  display: flex;
+  align-items: flex-end;
+}
+
+.cardWrapper {
+  position: relative;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: clamp(24px, 4vw, 36px);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  transition: all var(--transition-fast);
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #FFA800;
+}
+
+.quote {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: 1.65;
+  color: var(--color-text-primary);
+  font-style: italic;
+}
+
+.authorMeta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-orange);
+}
+
+.authorDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.authorName {
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.authorRole {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-4);
+}
+
+.indicators {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: #D1D5DB;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all var(--transition-fast);
+}
+
+.dotActive {
+  width: 24px;
+  background-color: var(--color-navy);
+}
+
+.navButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.navBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-white);
+  color: var(--color-navy);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.navBtn:hover {
+  border-color: var(--color-navy);
+  background-color: var(--color-navy);
+  color: var(--color-white);
+}
+
+.navBtn:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+  .headline {
+    font-size: clamp(1.75rem, 6.5vw, 2.25rem);
+    margin-bottom: var(--space-4);
+    min-height: 0;
+    display: block;
+  }
+
+  .cardWrapper {
+    padding: 20px 18px;
+    gap: var(--space-4);
+    border-radius: var(--radius-lg);
+  }
+
+  .quote {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+  }
+
+  .authorMeta {
+    gap: 12px;
+    padding-top: var(--space-3);
+  }
+
+  .avatar {
+    width: 42px;
+    height: 42px;
+  }
+
+  .authorName {
+    font-size: 0.875rem;
+  }
+
+  .authorRole {
+    font-size: 0.75rem;
+  }
+}

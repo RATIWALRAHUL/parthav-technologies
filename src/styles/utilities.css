@@ -1,0 +1,77 @@
+/* ==========================================================================
+   GLOBAL UTILITIES (MINIMAL & INTENTIONAL)
+   ========================================================================== */
+
+/* Container System */
+.container {
+  width: 100%;
+  max-width: min(var(--container-width), 100%);
+  margin-inline: auto;
+  padding-inline: 48px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1440px) {
+  .container {
+    padding-inline: 64px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .container {
+    padding-inline: 32px;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding-inline: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-inline: 16px;
+  }
+}
+
+/* Sections */
+.section {
+  position: relative;
+  width: 100%;
+  padding-block: var(--space-10);
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-block: var(--space-12);
+  }
+}
+
+.section-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* Alignment & Layout */
+.text-center {
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Screen reader only utility (A11y) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

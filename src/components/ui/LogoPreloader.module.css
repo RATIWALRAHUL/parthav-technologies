@@ -1,0 +1,50 @@
+.preloaderOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background-color: #031B3A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+  overflow: hidden;
+}
+
+.centerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+}
+
+.logoWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoImage {
+  width: auto;
+  height: clamp(38px, 6vw, 48px);
+  object-fit: contain;
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.4));
+}
+
+.lineTrack {
+  width: 140px;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.lineFill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6A00, #FF7A00);
+  border-radius: 9999px;
+  box-shadow: 0 0 12px rgba(255, 106, 0, 0.6);
+}

@@ -1,0 +1,31 @@
+.section {
+  position: relative;
+  width: 100%;
+  padding-top: clamp(64px, 8vw, 104px);
+  padding-bottom: clamp(64px, 8vw, 104px);
+  background-color: var(--color-bg);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(48px, 6vw, 72px);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.18fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .grid {
+    gap: 36px;
+  }
+}

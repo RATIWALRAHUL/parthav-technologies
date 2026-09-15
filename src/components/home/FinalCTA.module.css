@@ -1,0 +1,436 @@
+.ctaSection {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(160deg, var(--color-deep-navy) 0%, var(--color-navy) 100%);
+  color: var(--color-white);
+  padding-top: clamp(80px, 9vw, 100px);
+  padding-bottom: clamp(120px, 13vw, 160px);
+  overflow: hidden;
+}
+
+.mapBackground {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+      circle at 18% 15%,
+      rgba(255, 122, 0, 0.1),
+      transparent 55%
+    ),
+    radial-gradient(circle at 85% 80%, rgba(30, 96, 190, 0.14), transparent 50%),
+    radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: cover, cover, 28px 28px;
+  background-position: center, center, center;
+  pointer-events: none;
+}
+
+.contentContainer {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: clamp(40px, 6vw, 64px);
+}
+
+@media (min-width: 1024px) {
+  .contentContainer {
+    grid-template-columns: minmax(0, 56fr) minmax(0, 44fr);
+  }
+}
+
+.textSide {
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.eyebrowLine {
+  display: inline-block;
+  width: 30px;
+  height: 1px;
+  background-color: var(--color-orange);
+  flex-shrink: 0;
+}
+
+.eyebrow {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-orange-light);
+}
+
+.headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.35rem, 4.6vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  margin-bottom: var(--space-6);
+}
+
+.lineMask {
+  display: block;
+  overflow: hidden;
+}
+
+.lineInner {
+  display: block;
+  color: var(--color-white);
+}
+
+.orangeText {
+  color: var(--color-orange);
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--color-text-muted-on-dark);
+  margin-bottom: var(--space-7);
+  max-width: 480px;
+}
+
+.ctaGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-7);
+}
+
+.talkBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  background-color: var(--color-orange);
+  color: var(--color-white);
+  padding: 16px 32px;
+  min-height: 54px;
+  border-radius: 9999px;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(255, 106, 0, 0.35);
+  transition: all var(--transition-fast);
+}
+
+.talkBtnIcon {
+  transition: transform var(--transition-fast);
+}
+
+.talkBtn:hover {
+  background-color: var(--color-orange-light);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -4px rgba(255, 106, 0, 0.5);
+}
+
+.talkBtn:hover .talkBtnIcon {
+  transform: translateX(4px);
+}
+
+.talkBtn:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 2px;
+}
+
+.workBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  background-color: transparent;
+  color: var(--color-white);
+  padding: 16px 30px;
+  min-height: 54px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.workBtn:hover {
+  border-color: rgba(255, 255, 255, 0.85);
+  transform: translateY(-2px);
+}
+
+.workBtn:hover .playIconWrapper {
+  transform: translateX(3px);
+}
+
+.workBtn:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 2px;
+}
+
+.playIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.14);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.locationBadge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.scriptHighlight {
+  color: var(--color-orange-light);
+  font-style: italic;
+  font-weight: 700;
+}
+
+.metaDivider {
+  display: inline-block;
+  width: 1px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.strategyLine {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.strategyDot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: var(--color-orange);
+  flex-shrink: 0;
+}
+
+/* ========================================================
+   RIGHT VISUAL
+   ======================================================== */
+.visualSide {
+  position: relative;
+  width: 100%;
+}
+
+.visualStage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 420px;
+  margin: 0 auto;
+}
+
+.connectorSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.connectorPath {
+  stroke: rgba(255, 255, 255, 0.16);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 8;
+  animation: dashFlow 6s linear infinite;
+}
+
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -140;
+  }
+}
+
+.connectorDotBlue {
+  fill: #3E7BD6;
+  opacity: 0.7;
+}
+
+.connectorDotOrange {
+  fill: var(--color-orange-light);
+  opacity: 0.85;
+}
+
+.tileMain {
+  position: absolute;
+  top: 30%;
+  left: 32%;
+  width: clamp(140px, 20vw, 190px);
+  height: clamp(140px, 20vw, 190px);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(150deg, #1E5FC0 0%, #0C2C63 65%, #061B3E 100%);
+  box-shadow: 0 30px 60px -18px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    -6px 0 24px -4px rgba(255, 122, 0, 0.25);
+  overflow: hidden;
+}
+
+.tileMainSheen {
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 70%;
+  height: 70%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.28), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.tileGlass {
+  position: absolute;
+  top: 8%;
+  left: 8%;
+  width: clamp(64px, 9vw, 88px);
+  height: clamp(64px, 9vw, 88px);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.4);
+}
+
+.tileGhost {
+  position: absolute;
+  bottom: 6%;
+  left: 20%;
+  width: clamp(52px, 7vw, 72px);
+  height: clamp(52px, 7vw, 72px);
+  border-radius: var(--radius-md);
+  background: rgba(30, 96, 190, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tileAccent {
+  position: absolute;
+  top: 16%;
+  right: 10%;
+  width: clamp(30px, 4vw, 40px);
+  height: clamp(30px, 4vw, 40px);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(140deg, var(--color-orange-light), var(--color-orange));
+  box-shadow: 0 10px 24px -6px rgba(255, 106, 0, 0.55);
+}
+
+/* ========================================================
+   CURVED BOTTOM TRANSITION
+   ======================================================== */
+.curveDivider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.curveSvg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: clamp(48px, 7vw, 90px);
+}
+
+/* ========================================================
+   RESPONSIVE
+   ======================================================== */
+@media (max-width: 1023px) {
+  .visualStage {
+    max-height: 340px;
+  }
+}
+
+@media (max-width: 767px) {
+  .ctaSection {
+    padding-top: clamp(64px, 12vw, 80px);
+    padding-bottom: clamp(96px, 18vw, 120px);
+  }
+
+  .headline {
+    font-size: clamp(2.125rem, 8.5vw, 2.5rem);
+    margin-bottom: var(--space-5);
+  }
+
+  .description {
+    margin-bottom: var(--space-6);
+  }
+
+  .ctaGroup {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 12px;
+    margin-bottom: var(--space-6);
+  }
+
+  .talkBtn,
+  .workBtn {
+    width: 100%;
+    max-width: 360px;
+    justify-content: center;
+    min-height: 52px;
+  }
+
+  .metaRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .metaDivider {
+    display: none;
+  }
+
+  .strategyLine {
+    display: none;
+  }
+
+  .visualStage {
+    max-height: 260px;
+    margin-top: var(--space-4);
+  }
+
+  .tileGlass,
+  .tileGhost {
+    display: none;
+  }
+}
+
+/* ========================================================
+   REDUCED MOTION
+   ======================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .connectorPath {
+    animation: none;
+  }
+}

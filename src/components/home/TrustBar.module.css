@@ -1,0 +1,137 @@
+.trustSection {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-white);
+  padding: var(--space-4) 0 var(--space-6);
+  border-top: 1px solid rgba(6, 43, 87, 0.04);
+  border-bottom: 1px solid rgba(6, 43, 87, 0.05);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.label {
+  font-family: var(--font-heading);
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #7A899B;
+}
+
+.sideTagline {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  letter-spacing: 0.02em;
+}
+
+.marqueeContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: var(--space-2) 0;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+.marqueeTrack {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 4.5vw, 64px);
+  width: max-content;
+  animation: marqueeScroll 22s linear infinite;
+  will-change: transform;
+}
+
+.marqueeTrack:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.brandBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.72;
+  filter: grayscale(100%);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.brandBadge:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+
+.brandName {
+  font-family: var(--font-heading);
+  font-size: clamp(0.9375rem, 1.8vw, 1.125rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--color-navy);
+}
+
+@media (max-width: 767px) {
+  .labelRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .label {
+    font-size: 0.625rem;
+  }
+
+  .sideTagline {
+    font-size: 0.6875rem;
+  }
+
+  .marqueeTrack {
+    animation-duration: 16s;
+    gap: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marqueeTrack {
+    animation: none;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

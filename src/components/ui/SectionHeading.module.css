@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.center {
+  text-align: center;
+  align-items: center;
+}
+
+.left {
+  text-align: left;
+  align-items: flex-start;
+}
+
+.title {
+  color: var(--color-navy);
+}
+
+.titleDark {
+  color: var(--color-white);
+}
+
+.description {
+  max-width: 620px;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.descriptionDark {
+  color: rgba(255, 255, 255, 0.75);
+}

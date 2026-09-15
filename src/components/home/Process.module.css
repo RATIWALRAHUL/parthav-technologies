@@ -1,0 +1,212 @@
+.processSection {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-light);
+  padding-top: clamp(48px, 6vw, 88px);
+  padding-bottom: clamp(48px, 6vw, 88px);
+}
+
+.headerRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+
+@media (min-width: 768px) {
+  .headerRow {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.eyebrow {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-orange);
+  margin-bottom: var(--space-1);
+}
+
+.headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 3.125rem);
+  font-weight: 800;
+  color: var(--color-navy);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  max-width: 380px;
+}
+
+/* 5 Steps Layout with Connecting Line */
+.processContainer {
+  position: relative;
+  margin-bottom: var(--space-8);
+}
+
+.lineTrack {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .lineTrack {
+    display: block;
+    position: absolute;
+    top: 45px;
+    left: 40px;
+    right: 40px;
+    height: 2px;
+    background-color: rgba(6, 43, 87, 0.08);
+    z-index: 0;
+  }
+
+  .lineProgress {
+    height: 100%;
+    background: linear-gradient(90deg, #FF6A00, #FF7A00);
+    transform-origin: left center;
+  }
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 640px) {
+  .stepsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .stepsGrid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.stepCard {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: all var(--transition-smooth);
+}
+
+.stepCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -8px rgba(3, 27, 58, 0.08);
+  border-color: rgba(255, 106, 0, 0.3);
+}
+
+.stepTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stepIconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background-color: var(--color-blue-tint);
+  color: #1A60BD;
+}
+
+.stepNum {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--color-orange);
+}
+
+.stepTitle {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--color-navy);
+  line-height: 1.25;
+}
+
+.stepDesc {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+/* Milestone tracking banner */
+.milestoneBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding: 16px 24px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  text-align: center;
+}
+
+.milestoneDot {
+  color: var(--color-orange);
+}
+
+@media (max-width: 767px) {
+  .processSection {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .headerRow {
+    margin-bottom: var(--space-5);
+  }
+
+  .stepsGrid {
+    gap: 12px;
+    margin-bottom: var(--space-5);
+  }
+
+  .stepCard {
+    padding: 16px 14px;
+    gap: 8px;
+    border-radius: var(--radius-md);
+  }
+
+  .stepTitle {
+    font-size: 1rem;
+  }
+
+  .stepDesc {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+  }
+
+  .milestoneBar {
+    padding: 12px 14px;
+    font-size: 0.75rem;
+    gap: 8px;
+  }
+}

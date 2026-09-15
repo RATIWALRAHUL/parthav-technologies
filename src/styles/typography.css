@@ -1,0 +1,76 @@
+/* ==========================================================================
+   TYPOGRAPHY SYSTEM
+   ========================================================================== */
+
+h1, .h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.15rem, 8.5vw, 4.75rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--color-navy);
+}
+
+h2, .h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.85rem, 5.5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--color-navy);
+}
+
+h3, .h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 3.5vw, 2rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--color-navy);
+}
+
+h4, .h4 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--color-navy);
+}
+
+p, .body {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.1vw, 1.0625rem); /* Minimum 16px */
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+.body-large {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.6;
+}
+
+.body-small, small {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-orange);
+}
+
+.eyebrow-dark {
+  color: var(--color-orange-light);
+}
+
+.highlight-orange {
+  color: var(--color-orange);
+}
