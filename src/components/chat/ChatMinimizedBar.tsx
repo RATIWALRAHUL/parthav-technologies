@@ -11,10 +11,15 @@ interface ChatMinimizedBarProps {
 export const ChatMinimizedBar: React.FC<ChatMinimizedBarProps> = ({
   onExpand,
 }) => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onExpand();
+  };
+
   return (
     <div
       className={styles.minimizedBar}
-      onClick={onExpand}
+      onClick={handleClick}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
@@ -38,8 +43,15 @@ export const ChatMinimizedBar: React.FC<ChatMinimizedBarProps> = ({
         </div>
       </div>
 
-      <div className={styles.minimizedExpandBtn} aria-hidden="true">
-        <ChevronUp size={18} />
+      <div className={styles.minimizedControlsRight}>
+        <button
+          type="button"
+          className={styles.minimizedExpandBtn}
+          onClick={handleClick}
+          aria-label="Expand chat"
+        >
+          <ChevronUp size={18} />
+        </button>
       </div>
     </div>
   );

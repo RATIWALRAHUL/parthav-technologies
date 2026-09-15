@@ -77,7 +77,7 @@ export const ChatQuickActions: React.FC<ChatQuickActionsProps> = ({
             style={{ animationDelay: `${index * 40}ms` }}
           >
             <div className={`${styles.actionIconContainer} ${colorClass}`}>
-              {renderIcon(action.iconName, isMobile ? 18 : 17)}
+              {renderIcon(action.iconName, isMobile ? 18 : 15)}
             </div>
 
             <div className={styles.actionTextCol}>

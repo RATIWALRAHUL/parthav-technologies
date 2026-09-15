@@ -39,7 +39,8 @@ export const FloatingChatButton: React.FC<FloatingChatButtonProps> = ({
     }
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (showTooltip) {
       setShowTooltip(false);
       try {

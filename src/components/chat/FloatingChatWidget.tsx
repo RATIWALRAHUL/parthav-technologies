@@ -74,10 +74,14 @@ export const FloatingChatWidget: React.FC = () => {
     }
   }, [widgetState, isMobile]);
 
-  // Route change: minimize chatbot on mobile or when navigating
+  // Route change: minimize chatbot only when pathname actually changes
+  const prevPathnameRef = useRef(pathname);
   useEffect(() => {
-    if (widgetState === "open") {
-      setWidgetState("minimized");
+    if (prevPathnameRef.current !== pathname) {
+      prevPathnameRef.current = pathname;
+      if (widgetState === "open") {
+        setWidgetState("minimized");
+      }
     }
   }, [pathname, widgetState]);
 
