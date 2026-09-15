@@ -34,15 +34,28 @@
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 10px 28px rgba(255, 106, 0, 0.38), 0 4px 12px rgba(3, 27, 58, 0.16);
-  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 200ms ease;
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 250ms ease;
   position: relative;
   outline: none;
   -webkit-tap-highlight-color: transparent;
+  animation: fabFloat 3.4s ease-in-out infinite;
+}
+
+@keyframes fabFloat {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 10px 28px rgba(255, 106, 0, 0.38), 0 4px 12px rgba(3, 27, 58, 0.16);
+  }
+  50% {
+    transform: translateY(-7px);
+    box-shadow: 0 20px 38px rgba(255, 106, 0, 0.48), 0 8px 20px rgba(3, 27, 58, 0.22);
+  }
 }
 
 .fabButton:hover {
-  transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 14px 34px rgba(255, 106, 0, 0.46), 0 6px 16px rgba(3, 27, 58, 0.20);
+  animation-play-state: paused;
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 22px 46px rgba(255, 106, 0, 0.54), 0 8px 22px rgba(3, 27, 58, 0.24);
 }
 
 .fabButton:active {
@@ -162,18 +175,6 @@
   flex-direction: column;
   overflow: hidden;
   z-index: 9990;
-  animation: windowOpenDesktop 320ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes windowOpenDesktop {
-  from {
-    opacity: 0;
-    transform: translateY(14px) scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
 
 /* ------------------------------------------------------------
@@ -186,12 +187,6 @@
   background-color: rgba(3, 27, 58, 0.45);
   backdrop-filter: blur(4px);
   z-index: 9989;
-  animation: fadeIn 280ms ease forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 .chatWindowMobile {
@@ -209,17 +204,7 @@
   flex-direction: column;
   overflow: hidden;
   z-index: 9990;
-  animation: bottomSheetSlideUp 350ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
   padding-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-@keyframes bottomSheetSlideUp {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
 }
 
 .mobileDragHandleWrapper {

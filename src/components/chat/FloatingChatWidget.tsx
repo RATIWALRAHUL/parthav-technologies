@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import { FloatingChatButton } from "./FloatingChatButton";
 import { ChatWindow } from "./ChatWindow";
 import { ChatMinimizedBar } from "./ChatMinimizedBar";
@@ -66,7 +67,7 @@ export const FloatingChatWidget: React.FC = () => {
       // Delay listener slightly to avoid catching initial button click
       const timer = setTimeout(() => {
         document.addEventListener("mousedown", handleClickOutside);
-      }, 100);
+      }, 150);
       return () => {
         clearTimeout(timer);
         document.removeEventListener("mousedown", handleClickOutside);
@@ -112,34 +113,80 @@ export const FloatingChatWidget: React.FC = () => {
 
   return (
     <div ref={containerRef} className={styles.widgetContainer}>
-      {/* Mobile backdrop overlay */}
-      {isMobile && widgetState === "open" && (
-        <div
-          className={styles.mobileBackdrop}
-          onClick={handleClose}
-          aria-hidden="true"
-        />
-      )}
+      <AnimatePresence>
+        {/* Mobile backdrop overlay */}
+        {isMobile && widgetState === "open" && (
+          <motion.div
+            key="mobile-backdrop"
+            className={styles.mobileBackdrop}
+            onClick={handleClose}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
+            aria-hidden="true"
+          />
+        )}
 
-      {/* Main Chat Window (Desktop window or Mobile bottom sheet) */}
-      {widgetState === "open" && (
-        <ChatWindow
-          isMobile={isMobile}
-          onClose={handleClose}
-          onMinimize={handleMinimize}
-          onNavigate={handleNavigate}
-        />
-      )}
+        {/* Main Chat Window (Desktop window or Mobile bottom sheet) */}
+        {widgetState === "open" && (
+          <motion.div
+            key="chat-window-wrapper"
+            initial={
+              isMobile
+                ? { y: "100%", opacity: 1 }
+                : { opacity: 0, scale: 0.95, y: 16 }
+            }
+            animate={
+              isMobile
+                ? { y: 0, opacity: 1 }
+                : { opacity: 1, scale: 1, y: 0 }
+            }
+            exit={
+              isMobile
+                ? { y: "100%", opacity: 1 }
+                : { opacity: 0, scale: 0.95, y: 16 }
+            }
+            transition={{
+              duration: isMobile ? 0.35 : 0.28,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <ChatWindow
+              isMobile={isMobile}
+              onClose={handleClose}
+              onMinimize={handleMinimize}
+              onNavigate={handleNavigate}
+            />
+          </motion.div>
+        )}
 
-      {/* Minimized Pill Bar */}
-      {widgetState === "minimized" && (
-        <ChatMinimizedBar onExpand={handleExpand} />
-      )}
+        {/* Minimized Pill Bar */}
+        {widgetState === "minimized" && (
+          <motion.div
+            key="chat-minimized-wrapper"
+            initial={{ opacity: 0, scale: 0.92, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.92, y: 12 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <ChatMinimizedBar onExpand={handleExpand} />
+          </motion.div>
+        )}
 
-      {/* Floating Orange FAB Button */}
-      {widgetState === "closed" && (
-        <FloatingChatButton onClick={handleOpen} hasUnread={hasUnread} />
-      )}
+        {/* Floating Orange FAB Button with breathing float */}
+        {widgetState === "closed" && (
+          <motion.div
+            key="chat-fab-wrapper"
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.85 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <FloatingChatButton onClick={handleOpen} hasUnread={hasUnread} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
