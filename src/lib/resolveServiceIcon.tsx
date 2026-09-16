@@ -38,7 +38,65 @@ import {
   Database,
   Bell,
   CloudCog,
+  Mic,
+  Mail,
+  Compass,
+  Clock,
+  FileSpreadsheet,
 } from "lucide-react";
+
+const ICON_MAP: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }>> = {
+  Globe2,
+  Building2,
+  BriefcaseBusiness,
+  PanelsTopLeft,
+  Code2,
+  Atom,
+  Server,
+  ServerCog,
+  AppWindow,
+  Layers,
+  Webhook,
+  Braces,
+  PlugZap,
+  FileCog,
+  ArrowRightLeft,
+  Gauge,
+  CalendarCheck,
+  Store,
+  FileText,
+  Smartphone,
+  Bot,
+  MessageCircle,
+  Sparkles,
+  Search,
+  Settings2,
+  MapPin,
+  ChartNoAxesCombined,
+  Shapes,
+  PenTool,
+  UsersRound,
+  UserPlus,
+  Workflow,
+  Zap,
+  ShoppingCart,
+  LayoutDashboard,
+  Database,
+  Bell,
+  CloudCog,
+  Mic,
+  Mail,
+  Compass,
+  Clock,
+  FileSpreadsheet,
+};
+
+export function resolveIconByName(iconName?: string): React.ReactNode | null {
+  if (!iconName) return null;
+  const Comp = ICON_MAP[iconName];
+  if (!Comp) return null;
+  return <Comp size={22} strokeWidth={1.85} />;
+}
 
 /** Exact-title icon overrides for the Web Development catalogue (PRD §5) — checked before the heuristic fallback below. */
 function resolveExactIcon(title: string, props: { size: number; strokeWidth: number }): React.ReactNode | null {
@@ -91,8 +149,13 @@ function resolveExactIcon(title: string, props: { size: number; strokeWidth: num
  * Plain server-safe function (no "use client") so both server and client card
  * components can call it without crossing the server/client boundary.
  */
-export function resolveIcon(title: string): React.ReactNode {
-  const props = { size: 24, strokeWidth: 1.85 as const };
+export function resolveIcon(title: string, iconName?: string): React.ReactNode {
+  if (iconName) {
+    const fromName = resolveIconByName(iconName);
+    if (fromName) return fromName;
+  }
+
+  const props = { size: 22, strokeWidth: 1.85 as const };
 
   const exact = resolveExactIcon(title, props);
   if (exact) return exact;

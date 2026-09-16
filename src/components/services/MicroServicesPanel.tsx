@@ -55,11 +55,14 @@ export function MicroServicesPanel({ service, onBack }: MicroServicesPanelProps)
                   .map((micro) => (
                     <ServiceDetailCard
                       key={micro.id}
-                      icon={resolveIcon(micro.title)}
+                      icon={resolveIcon(micro.name || micro.title, micro.icon)}
+                      iconName={micro.icon}
+                      name={micro.name}
                       title={micro.title}
                       description={micro.description}
-                      href={`/services/${service.categorySlug}/${micro.id}`}
-                      comingSoon={micro.comingSoon}
+                      route={micro.route || (micro.status === "available" ? `/services/${service.categorySlug}/${micro.id}` : undefined)}
+                      status={micro.status}
+                      comingSoon={micro.comingSoon ?? micro.status === "coming-soon"}
                       category={service.title}
                     />
                   ))}
@@ -73,11 +76,14 @@ export function MicroServicesPanel({ service, onBack }: MicroServicesPanelProps)
             {service.microServices.map((micro) => (
               <ServiceDetailCard
                 key={micro.id}
-                icon={resolveIcon(micro.title)}
+                icon={resolveIcon(micro.name || micro.title, micro.icon)}
+                iconName={micro.icon}
+                name={micro.name}
                 title={micro.title}
                 description={micro.description}
-                href={`/services/${service.categorySlug}/${micro.id}`}
-                comingSoon={micro.comingSoon}
+                route={micro.route || (micro.status === "available" ? `/services/${service.categorySlug}/${micro.id}` : undefined)}
+                status={micro.status}
+                comingSoon={micro.comingSoon ?? micro.status === "coming-soon"}
                 category={service.title}
               />
             ))}

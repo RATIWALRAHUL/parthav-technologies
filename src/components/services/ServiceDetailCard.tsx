@@ -4,76 +4,118 @@ import React from "react";
 import Link from "next/link";
 import { Clock } from "lucide-react";
 import { useComingSoon } from "./ComingSoonProvider";
+import { resolveIcon } from "@/lib/resolveServiceIcon";
+import type { ServiceStatus } from "@/data/main-services";
 import styles from "./ServiceDetailCard.module.css";
 
-interface ServiceDetailCardProps {
+export interface ServiceDetailCardProps {
   id?: string;
-  icon: React.ReactNode;
-  title: string;
+  icon?: React.ReactNode;
+  iconName?: string;
+  title?: string;
+  name?: string;
   description?: string;
-  /** Real page every micro-service has — used for available cards, and to seed the Coming Soon modal's context. */
-  href: string;
-  /** True only for the genuinely not-yet-launched capabilities. */
+  /** Real destination route, e.g. /services/web-development/business-websites */
+  href?: string;
+  route?: string;
+  /** Central registry service status */
+  status?: ServiceStatus;
   comingSoon?: boolean;
-  /** Parent service name, shown inside the Coming Soon modal. */
+  /** Parent service name, shown inside Coming Soon modal */
   category: string;
 }
 
 export function ServiceDetailCard({
   id,
   icon,
+  iconName,
   title,
+  name,
   description,
   href,
+  route,
+  status,
   comingSoon,
   category,
 }: ServiceDetailCardProps) {
   const { openComingSoon } = useComingSoon();
+  const displayName = name || title || "";
 
-  const body = (
+  // Determine destination route
+  const targetRoute = route || href;
+
+  // Strict invariant: if marked coming-soon, or if route is missing / invalid (e.g. #, /#contact, /),
+  // card acts as Coming Soon / Get Notified rather than redirecting to homepage or #contact.
+  const isComingSoon =
+    status === "coming-soon" ||
+    comingSoon === true ||
+    !targetRoute ||
+    targetRoute === "/" ||
+    targetRoute.startsWith("/#") ||
+    targetRoute.startsWith("#");
+
+  const renderedIcon =
+    icon || resolveIcon(displayName, iconName);
+
+  const cardContent = (
     <>
       <div className={styles.cardTop}>
-        <span className={`${styles.iconWrapper} ${comingSoon ? styles.iconWrapperComingSoon : ""}`} aria-hidden="true">
-          {icon}
-        </span>
-        <span className={`${styles.statusPill} ${comingSoon ? styles.statusComingSoon : styles.statusAvailable}`}>
-          {comingSoon ? (
-            <Clock size={11} strokeWidth={2.25} aria-hidden="true" />
+        <div
+          className={`${styles.iconWrapper} ${isComingSoon ? styles.iconWrapperComingSoon : styles.iconWrapperAvailable}`}
+          aria-hidden="true"
+        >
+          {renderedIcon}
+        </div>
+        <span
+          className={`${styles.statusPill} ${isComingSoon ? styles.statusComingSoon : styles.statusAvailable}`}
+        >
+          {isComingSoon ? (
+            <>
+              <Clock size={11} strokeWidth={2.2} aria-hidden="true" />
+              <span>Coming Soon</span>
+            </>
           ) : (
-            <span className={styles.statusDot} aria-hidden="true" />
+            <>
+              <span className={styles.statusDot} aria-hidden="true" />
+              <span>Available</span>
+            </>
           )}
-          {comingSoon ? "Coming Soon" : "Available"}
         </span>
       </div>
 
-      <h3 className={styles.title}>{title}</h3>
+      <h3 className={styles.title}>{displayName}</h3>
       {description && <p className={styles.description}>{description}</p>}
 
-      <div className={styles.divider} />
+      <div className={styles.divider} aria-hidden="true" />
 
-      <span className={`${styles.cta} ${comingSoon ? styles.ctaComingSoon : ""}`}>
-        {comingSoon ? "Get Notified" : "Explore Service"}
+      <span className={`${styles.cta} ${isComingSoon ? styles.ctaComingSoon : styles.ctaAvailable}`}>
+        {isComingSoon ? "Get Notified" : "Explore Service"}
       </span>
     </>
   );
 
-  if (comingSoon) {
+  if (isComingSoon) {
     return (
       <button
         id={id}
         type="button"
         className={`${styles.card} ${styles.cardComingSoon}`}
-        onClick={() => openComingSoon({ serviceName: title, category })}
-        aria-label={`Get notified when ${title} launches`}
+        onClick={() => openComingSoon({ serviceName: displayName, category, description })}
+        aria-label={`Get notified when ${displayName} launches`}
       >
-        {body}
+        {cardContent}
       </button>
     );
   }
 
   return (
-    <Link id={id} href={href} className={styles.card} aria-label={`Explore ${title} service`}>
-      {body}
+    <Link
+      id={id}
+      href={targetRoute!}
+      className={styles.card}
+      aria-label={`Explore ${displayName} service`}
+    >
+      {cardContent}
     </Link>
   );
 }

@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
+    "dev:turbo": "next dev --turbo",
+    "clean": "node -e \"try{require('fs').rmSync('.next',{recursive:true,force:true});console.log('.next cleaned')}catch(e){}\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

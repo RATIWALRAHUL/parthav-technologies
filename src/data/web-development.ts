@@ -16,7 +16,7 @@ export const WEB_DEV_SERVICE_CARDS: WebDevServiceCard[] = [
     title: "Business Websites",
     description:
       "Professional, modern websites that represent your brand and convert visitors into customers.",
-    href: "/#contact",
+    href: "/services/web-development/business-websites",
   },
   {
     id: "ecommerce-development",
@@ -24,7 +24,7 @@ export const WEB_DEV_SERVICE_CARDS: WebDevServiceCard[] = [
     title: "E-commerce Development",
     description:
       "Feature-rich online stores with seamless shopping experiences and powerful integrations.",
-    href: "/#contact",
+    href: "/services/web-development/ecommerce-apps",
   },
   {
     id: "custom-web-applications",
@@ -32,7 +32,7 @@ export const WEB_DEV_SERVICE_CARDS: WebDevServiceCard[] = [
     title: "Custom Web Applications",
     description:
       "Tailored web applications built around your unique business processes and workflows.",
-    href: "/#contact",
+    href: "/services/web-development/custom-web-applications",
   },
   {
     id: "landing-pages",
@@ -40,7 +40,7 @@ export const WEB_DEV_SERVICE_CARDS: WebDevServiceCard[] = [
     title: "Landing Pages",
     description:
       "High-converting landing pages for products, campaigns and business growth.",
-    href: "/#contact",
+    href: "/services/web-development/landing-pages",
   },
   {
     id: "saas-platforms",
@@ -48,7 +48,7 @@ export const WEB_DEV_SERVICE_CARDS: WebDevServiceCard[] = [
     title: "SaaS Platforms",
     description:
       "Scalable SaaS solutions with multi-tenant architecture and modern technology.",
-    href: "/#contact",
+    href: "/services/web-development/saas-platforms",
   },
   {
     id: "cms-development",
@@ -56,7 +56,7 @@ export const WEB_DEV_SERVICE_CARDS: WebDevServiceCard[] = [
     title: "CMS Development",
     description:
       "Custom CMS solutions for easy content management and complete control.",
-    href: "/#contact",
+    href: "/services/web-development/cms-development",
   },
   {
     id: "api-development",
@@ -64,7 +64,7 @@ export const WEB_DEV_SERVICE_CARDS: WebDevServiceCard[] = [
     title: "API Development",
     description:
       "Robust APIs and third-party integrations to connect your digital ecosystem.",
-    href: "/#contact",
+    href: "/services/web-development/api-development",
   },
   {
     id: "website-optimization",
@@ -72,7 +72,7 @@ export const WEB_DEV_SERVICE_CARDS: WebDevServiceCard[] = [
     title: "Website Optimization",
     description:
       "Improve speed, performance and Core Web Vitals for better user experience and SEO.",
-    href: "/#contact",
+    href: "/services/web-development/website-optimization",
   },
 ];
 

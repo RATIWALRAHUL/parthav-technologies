@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container } from "@/components/ui/Container";
 import { TECH_STACK } from "@/data/web-development";
+import { TechLogo } from "@/components/common/TechLogo";
 // Reuses the exact section-header styles from the main Services page.
 import sharedStyles from "@/components/services/ServicesExplorer.module.css";
 import styles from "./TechStack.module.css";
@@ -55,7 +56,7 @@ export function TechStack({
           {technologies.map((name) => (
             <div key={name} className={styles.techCard}>
               <span className={styles.techMark} aria-hidden="true">
-                {name.charAt(0)}
+                <TechLogo name={name} size={22} />
               </span>
               <span className={styles.techName}>{name}</span>
             </div>

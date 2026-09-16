@@ -16,8 +16,18 @@ interface PageParams {
   micro: string;
 }
 
+const CATEGORY_ALIASES: Record<string, string> = {
+  "web-mobile-development": "web-development",
+  "web-mobile": "web-development",
+  "ui-ux": "ui-ux-product-design",
+  "branding": "branding-digital-identity",
+  "crm-automation": "crm-business-automation",
+  "seo-growth": "seo-digital-growth",
+};
+
 function resolveDetail(params: PageParams) {
-  const mainService = MAIN_SERVICES.find((s) => s.categorySlug === params.category);
+  const normalizedCategory = CATEGORY_ALIASES[params.category] ?? params.category;
+  const mainService = MAIN_SERVICES.find((s) => s.categorySlug === normalizedCategory);
   if (!mainService) return null;
   if (!mainService.microServices.some((m) => m.id === params.micro)) return null;
 

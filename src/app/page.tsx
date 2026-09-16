@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Hero } from "@/components/home/Hero";
 import { IndustriesWeServe } from "@/components/home/IndustriesWeServe";
 import { Services } from "@/components/home/Services";
+import { TechStackShowcase } from "@/components/technology/TechStackShowcase";
 import { WhyParthav } from "@/components/home/WhyParthav";
 import { ImpactMetrics } from "@/components/home/ImpactMetrics";
 import { CaseStudies } from "@/components/home/CaseStudies";
@@ -21,6 +22,7 @@ export default function HomePage() {
         <Hero />
         <IndustriesWeServe />
         <Services />
+        <TechStackShowcase />
         <WhyParthav />
         <ImpactMetrics />
         <CaseStudies />

@@ -6,6 +6,7 @@ import { ServicesHero } from "@/components/services/ServicesHero";
 import { ServicesExplorer } from "@/components/services/ServicesExplorer";
 import { AdditionalCapabilities } from "@/components/services/AdditionalCapabilities";
 import { DetailedServices } from "@/components/services/DetailedServices";
+import { TechStackShowcase } from "@/components/technology/TechStackShowcase";
 import { Process } from "@/components/home/Process";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { SERVICES_DATA } from "@/data/services";
@@ -83,6 +84,7 @@ export default function ServicesPage() {
         </Suspense>
         <AdditionalCapabilities />
         <DetailedServices />
+        <TechStackShowcase />
         <Process />
         <FinalCTA />
       </main>

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { X, Bell, Mail, Sparkles, ArrowRight, Check } from "lucide-react";
 import styles from "./ComingSoonModal.module.css";
@@ -98,12 +99,26 @@ export function ComingSoonModal({
               </button>
 
               <div className={styles.contentCol}>
-                <span className={styles.eyebrow}>COMING SOON</span>
-                <h2 id="coming-soon-title" className={styles.title}>
-                  {serviceName}
-                  <br />
-                  <span className={styles.orangeText}>is Coming Soon.</span>
-                </h2>
+                <div className={styles.headerFlex}>
+                  <div>
+                    <span className={styles.eyebrow}>COMING SOON</span>
+                    <h2 id="coming-soon-title" className={styles.title}>
+                      {serviceName}
+                      <br />
+                      <span className={styles.orangeText}>is Coming Soon.</span>
+                    </h2>
+                  </div>
+                  <div className={styles.modalImageWrapper} aria-hidden="true">
+                    <Image
+                      src="/images/services/coming-soon-global.avif"
+                      alt=""
+                      width={84}
+                      height={84}
+                      loading="lazy"
+                      className={styles.modalImage}
+                    />
+                  </div>
+                </div>
                 <span className={styles.categoryTag}>{category}</span>
 
                 <p className={styles.description}>&ldquo;{description}&rdquo;</p>

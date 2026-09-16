@@ -119,7 +119,7 @@ export const SERVICE_PAGES: Record<string, ServicePageData> = {
     microHeadlineLines: [{ text: "Practical AI." }, { text: "Real Business Impact.", orange: true }],
     microDescription:
       "Use AI and automation to simplify workflows, improve customer experiences and help your business operate smarter.",
-    technologies: ["AI APIs", "LLM Integrations", "RAG", "Vector Search", "Node.js", "Automation APIs"],
+    technologies: ["OpenAI", "Claude", "LangChain", "Python", "Node.js", "Pinecone"],
     processHeadlineLines: [{ text: "A Clear Process." }, { text: "Designed for Better Results.", orange: true }],
     processSubtitle: "A simple, transparent process that keeps you involved at every step.",
     processSteps: STANDARD_PROCESS_STEPS([

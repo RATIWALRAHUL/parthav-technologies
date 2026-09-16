@@ -347,11 +347,14 @@ export function MicroServiceDetailTemplate({ detail }: { detail: MicroServiceDet
               {relatedMicros.map(({ micro, main }) => (
                 <ServiceDetailCard
                   key={micro.id}
-                  icon={resolveIcon(micro.title)}
+                  icon={resolveIcon(micro.name || micro.title, micro.icon)}
+                  iconName={micro.icon}
+                  name={micro.name}
                   title={micro.title}
                   description={micro.description}
-                  href={`/services/${main.categorySlug}/${micro.id}`}
-                  comingSoon={micro.comingSoon}
+                  route={micro.route || (micro.status === "available" ? `/services/${main.categorySlug}/${micro.id}` : undefined)}
+                  status={micro.status}
+                  comingSoon={micro.comingSoon ?? micro.status === "coming-soon"}
                   category={main.title}
                 />
               ))}
