@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowRight, Menu, Phone, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
@@ -17,9 +18,12 @@ import { MagneticButton } from "@/components/ui/MagneticButton";
 const STANDARD_EASE = [0.22, 1, 0.36, 1] as const;
 
 export function Navbar() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("Home");
+  const [activeSection, setActiveSection] = useState(() =>
+    pathname === "/services" ? "Services" : "Home"
+  );
 
   // Track scroll position for elevated header styling
   useEffect(() => {
@@ -59,16 +63,27 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
 
-  const handleNavClick = (label: string, href: string) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    label: string,
+    href: string
+  ) => {
     setActiveSection(label);
     setMobileMenuOpen(false);
 
-    if (href.startsWith("#")) {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+    const [hrefPath, hrefHash] = href.split("#");
+    const targetPath = hrefPath === "" ? "/" : hrefPath;
+
+    // Already on the target page: smooth-scroll instead of a full navigation.
+    if (targetPath === pathname) {
+      e.preventDefault();
+      if (hrefHash) {
+        document.getElementById(hrefHash)?.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
     }
+    // Otherwise let Link navigate to the other page (and land on the hash, if any).
   };
 
   return (
@@ -105,16 +120,13 @@ export function Navbar() {
                 const isActive = activeSection === item.label;
                 return (
                   <li key={item.label}>
-                    <a
+                    <Link
                       href={item.href}
                       className={clsx(
                         styles.navLink,
                         isActive && styles.activeLink
                       )}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavClick(item.label, item.href);
-                      }}
+                      onClick={(e) => handleNavClick(e, item.label, item.href)}
                     >
                       {item.label}
                       {isActive && (
@@ -129,7 +141,7 @@ export function Navbar() {
                           }}
                         />
                       )}
-                    </a>
+                    </Link>
                   </li>
                 );
               })}
@@ -204,16 +216,13 @@ export function Navbar() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.05 + index * 0.07, duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      <a
+                      <Link
                         href={item.href}
                         className={clsx(
                           styles.mobileNavLink,
                           isActive && styles.mobileNavLinkActive
                         )}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleNavClick(item.label, item.href);
-                        }}
+                        onClick={(e) => handleNavClick(e, item.label, item.href)}
                       >
                         <span>{item.label}</span>
                         {isActive && (
@@ -226,7 +235,7 @@ export function Navbar() {
                             }}
                           />
                         )}
-                      </a>
+                      </Link>
                     </motion.li>
                   );
                 })}

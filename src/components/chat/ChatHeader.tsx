@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import { MoreHorizontal, Minus, X, RotateCcw, Phone, ExternalLink } from "lucide-react";
 import { ChatAvatar } from "./ChatAvatar";
 import { CHAT_CONFIG } from "./chat.config";
@@ -91,7 +92,7 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
                 <Phone size={15} />
                 <span>Call Studio ({CHAT_CONFIG.companyContact.phone})</span>
               </a>
-              <a
+              <Link
                 href="/services"
                 className={styles.dropdownMenuItem}
                 role="menuitem"
@@ -99,7 +100,7 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
               >
                 <ExternalLink size={15} />
                 <span>Browse Services</span>
-              </a>
+              </Link>
             </div>
           )}
         </div>

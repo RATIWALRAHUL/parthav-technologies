@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
-import { Search, Compass, PenTool, Code2, Rocket } from "lucide-react";
+import Link from "next/link";
+import { Search, Compass, PenTool, Code2, Rocket, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { PROCESS_STEPS } from "@/data/process";
+import { PROCESS_STEPS, type ProcessStep } from "@/data/process";
 import styles from "./Process.module.css";
 
 const STEP_ICONS: Record<string, React.ReactNode> = {
@@ -16,7 +17,26 @@ const STEP_ICONS: Record<string, React.ReactNode> = {
   Rocket: <Rocket size={18} strokeWidth={1.8} />,
 };
 
-export function Process() {
+interface ProcessProps {
+  eyebrow?: string;
+  heading?: React.ReactNode;
+  subtitle?: string;
+  steps?: ProcessStep[];
+  cta?: { label: string; href: string };
+}
+
+export function Process({
+  eyebrow = "OUR PROCESS",
+  heading = (
+    <>
+      A clear process. <br />
+      No black box.
+    </>
+  ),
+  subtitle = "Transparent, collaborative and focused on your business goals.",
+  steps = PROCESS_STEPS,
+  cta,
+}: ProcessProps) {
   return (
     <section id="process" className={styles.processSection} aria-label="Our 5-Step Process">
       <Container>
@@ -24,19 +44,20 @@ export function Process() {
         <div className={styles.headerRow}>
           <div>
             <Reveal>
-              <span className={styles.eyebrow}>OUR PROCESS</span>
-              <h2 className={styles.headline}>
-                A clear process. <br />
-                No black box.
-              </h2>
+              <span className={styles.eyebrow}>{eyebrow}</span>
+              <h2 className={styles.headline}>{heading}</h2>
             </Reveal>
           </div>
 
-          <div>
+          <div className={styles.headerRight}>
             <Reveal delay={0.1}>
-              <p className={styles.subtitle}>
-                Transparent, collaborative and focused on your business goals.
-              </p>
+              <p className={styles.subtitle}>{subtitle}</p>
+              {cta && (
+                <Link href={cta.href} className={styles.headerCta}>
+                  <span>{cta.label}</span>
+                  <ArrowRight size={15} strokeWidth={2} />
+                </Link>
+              )}
             </Reveal>
           </div>
         </div>
@@ -55,7 +76,7 @@ export function Process() {
           </div>
 
           <div className={styles.stepsGrid}>
-            {PROCESS_STEPS.map((step, index) => (
+            {steps.map((step, index) => (
               <motion.div
                 key={step.step}
                 className={styles.stepCard}

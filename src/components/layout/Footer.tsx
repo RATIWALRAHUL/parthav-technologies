@@ -101,32 +101,32 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#about" className={styles.footerLink}>
+                  <Link href="/#about" className={styles.footerLink}>
                     About Us
                   </Link>
                 </li>
                 <li>
-                  <Link href="#services" className={styles.footerLink}>
+                  <Link href="/services" className={styles.footerLink}>
                     Services
                   </Link>
                 </li>
                 <li>
-                  <Link href="#work" className={styles.footerLink}>
+                  <Link href="/#work" className={styles.footerLink}>
                     Featured Work
                   </Link>
                 </li>
                 <li>
-                  <Link href="#process" className={styles.footerLink}>
+                  <Link href="/#process" className={styles.footerLink}>
                     Our Process
                   </Link>
                 </li>
                 <li>
-                  <Link href="#seo-ai" className={styles.footerLink}>
+                  <Link href="/#seo-ai" className={styles.footerLink}>
                     SEO & AI
                   </Link>
                 </li>
                 <li>
-                  <Link href="#contact" className={styles.footerLink}>
+                  <Link href="/#contact" className={styles.footerLink}>
                     Contact
                   </Link>
                 </li>
@@ -147,27 +147,27 @@ export function Footer() {
             <div className={styles.collapsibleContent}>
               <ul className={styles.linkList}>
                 <li>
-                  <Link href="#services" className={styles.footerLink}>
+                  <Link href="/services/ui-ux-product-design" className={styles.footerLink}>
                     UI/UX & Product Design
                   </Link>
                 </li>
                 <li>
-                  <Link href="#services" className={styles.footerLink}>
+                  <Link href="/services/web-development" className={styles.footerLink}>
                     Web Development
                   </Link>
                 </li>
                 <li>
-                  <Link href="#services" className={styles.footerLink}>
+                  <Link href="/services/seo-digital-growth" className={styles.footerLink}>
                     SEO & Digital Growth
                   </Link>
                 </li>
                 <li>
-                  <Link href="#services" className={styles.footerLink}>
+                  <Link href="/services/ai-automation" className={styles.footerLink}>
                     AI & Automation
                   </Link>
                 </li>
                 <li>
-                  <Link href="#services" className={styles.footerLink}>
+                  <Link href="/services" className={styles.footerLink}>
                     SaaS Engineering
                   </Link>
                 </li>
@@ -188,22 +188,22 @@ export function Footer() {
             <div className={styles.collapsibleContent}>
               <ul className={styles.linkList}>
                 <li>
-                  <Link href="#work" className={styles.footerLink}>
+                  <Link href="/#work" className={styles.footerLink}>
                     Case Studies
                   </Link>
                 </li>
                 <li>
-                  <Link href="#process" className={styles.footerLink}>
+                  <Link href="/#process" className={styles.footerLink}>
                     Delivery Framework
                   </Link>
                 </li>
                 <li>
-                  <Link href="#faq" className={styles.footerLink}>
+                  <Link href="/#faq" className={styles.footerLink}>
                     FAQ
                   </Link>
                 </li>
                 <li>
-                  <Link href="#seo-ai" className={styles.footerLink}>
+                  <Link href="/#seo-ai" className={styles.footerLink}>
                     SEO & AI Guide
                   </Link>
                 </li>

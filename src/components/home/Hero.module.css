@@ -416,19 +416,30 @@
   }
 
   .ctaGroup {
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
-    gap: 12px;
+    gap: 10px;
     margin-bottom: 24px;
   }
 
   .primaryCta,
   .secondaryCta {
-    width: 100%;
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
     justify-content: center;
-    min-height: 52px;
-    padding: 0 20px;
-    font-size: 0.95rem;
+    gap: 6px;
+    min-height: 44px;
+    padding: 0 12px;
+    font-size: 0.8125rem;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .playIconWrapper {
+    width: 22px;
+    height: 22px;
   }
 
   .trustCluster {
@@ -483,9 +494,10 @@
 
   .primaryCta,
   .secondaryCta {
-    min-height: 46px;
-    font-size: 0.875rem;
-    padding: 0 16px;
+    min-height: 44px;
+    font-size: 0.75rem;
+    padding: 0 10px;
+    gap: 5px;
   }
 
   .metricsRow {

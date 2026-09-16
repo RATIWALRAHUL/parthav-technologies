@@ -1,3 +1,18 @@
+export type ServiceCategoryId =
+  | "design"
+  | "development"
+  | "ai"
+  | "seo"
+  | "branding"
+  | "crm";
+
+export interface ServiceDetail {
+  subtitle: string;
+  capabilities: string[];
+  ctaLabel: string;
+  ctaHref: string;
+}
+
 export interface ServiceItem {
   id: string;
   number: string;
@@ -6,6 +21,8 @@ export interface ServiceItem {
   capabilities: string[];
   iconName: string;
   href: string;
+  category: ServiceCategoryId;
+  detailed: ServiceDetail;
 }
 
 export const SERVICES_DATA: ServiceItem[] = [
@@ -18,6 +35,19 @@ export const SERVICES_DATA: ServiceItem[] = [
     capabilities: ["UI/UX Design", "Product Design", "Design Systems"],
     iconName: "PenTool",
     href: "/services#ui-ux",
+    category: "design",
+    detailed: {
+      subtitle: "User-centered design for real business impact.",
+      capabilities: [
+        "UX Research & Strategy",
+        "Wireframes & Prototypes",
+        "UI Design & Visual Systems",
+        "Design for Web & Mobile",
+        "UX Audits & Redesigns",
+      ],
+      ctaLabel: "Start Your Design Project",
+      ctaHref: "/#contact",
+    },
   },
   {
     id: "web-mobile-dev",
@@ -27,7 +57,20 @@ export const SERVICES_DATA: ServiceItem[] = [
       "Build fast, responsive and scalable digital experiences across web and mobile.",
     capabilities: ["Web Applications", "Mobile Apps", "Custom Software"],
     iconName: "MonitorSmartphone",
-    href: "/services#web-mobile-dev",
+    href: "/services/web-development",
+    category: "development",
+    detailed: {
+      subtitle: "Fast, scalable digital products built for real users.",
+      capabilities: [
+        "Web Applications",
+        "Responsive Websites",
+        "Mobile Applications",
+        "Custom Software",
+        "API Integrations",
+      ],
+      ctaLabel: "Start Your Development Project",
+      ctaHref: "/#contact",
+    },
   },
   {
     id: "ai-automation",
@@ -38,6 +81,19 @@ export const SERVICES_DATA: ServiceItem[] = [
     capabilities: ["AI Solutions", "Workflow Automation", "AI Agents"],
     iconName: "Bot",
     href: "/services#ai-automation",
+    category: "ai",
+    detailed: {
+      subtitle: "Practical AI systems designed around real business workflows.",
+      capabilities: [
+        "AI Assistants",
+        "AI Agents",
+        "Workflow Automation",
+        "Customer Support Automation",
+        "AI-powered Search",
+      ],
+      ctaLabel: "Start Your AI Project",
+      ctaHref: "/#contact",
+    },
   },
   {
     id: "seo-growth",
@@ -48,6 +104,19 @@ export const SERVICES_DATA: ServiceItem[] = [
     capabilities: ["Technical SEO", "AI Search / GEO", "Conversion Optimization"],
     iconName: "TrendingUp",
     href: "/services#seo-growth",
+    category: "seo",
+    detailed: {
+      subtitle: "Build visibility across search and modern discovery platforms.",
+      capabilities: [
+        "Technical SEO",
+        "On-page SEO",
+        "AI Search / GEO",
+        "Analytics",
+        "Conversion Optimization",
+      ],
+      ctaLabel: "Start Your Growth Project",
+      ctaHref: "/#contact",
+    },
   },
   {
     id: "branding-identity",
@@ -58,6 +127,19 @@ export const SERVICES_DATA: ServiceItem[] = [
     capabilities: ["Brand Identity", "Visual Systems", "Digital Brand Strategy"],
     iconName: "Shapes",
     href: "/services#branding-identity",
+    category: "branding",
+    detailed: {
+      subtitle: "Create a recognizable identity across every digital touchpoint.",
+      capabilities: [
+        "Brand Strategy",
+        "Logo & Identity",
+        "Visual Systems",
+        "Digital Guidelines",
+        "Marketing Creatives",
+      ],
+      ctaLabel: "Start Your Branding Project",
+      ctaHref: "/#contact",
+    },
   },
   {
     id: "crm-automation",
@@ -68,6 +150,19 @@ export const SERVICES_DATA: ServiceItem[] = [
     capabilities: ["CRM", "Lead Automation", "Workflow Integrations"],
     iconName: "Workflow",
     href: "/services#crm-automation",
+    category: "crm",
+    detailed: {
+      subtitle: "Connect your business tools and automate repetitive workflows.",
+      capabilities: [
+        "CRM Setup",
+        "Lead Management",
+        "Workflow Automation",
+        "WhatsApp / Email Automation",
+        "API Integrations",
+      ],
+      ctaLabel: "Start Your Automation Project",
+      ctaHref: "/#contact",
+    },
   },
 ];
 

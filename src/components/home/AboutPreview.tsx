@@ -57,13 +57,13 @@ export function AboutPreview() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.2 + index * 0.08 }}
                 >
-                  <span className={styles.valueIconBox} aria-hidden="true">
-                    {VALUE_ICONS[val.iconName]}
-                  </span>
-                  <div>
+                  <div className={styles.valueHeader}>
+                    <span className={styles.valueIconBox} aria-hidden="true">
+                      {VALUE_ICONS[val.iconName]}
+                    </span>
                     <h3 className={styles.valueTitle}>{val.title}</h3>
-                    <p className={styles.valueDesc}>{val.description}</p>
                   </div>
+                  <p className={styles.valueDesc}>{val.description}</p>
                 </motion.div>
               ))}
             </div>

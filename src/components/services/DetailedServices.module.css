@@ -1,0 +1,263 @@
+.section {
+  width: 100%;
+  background-color: var(--color-white);
+  padding-top: clamp(56px, 7vw, 96px);
+  padding-bottom: clamp(56px, 7vw, 96px);
+  scroll-margin-top: 90px;
+}
+
+.headerRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: clamp(36px, 4.5vw, 56px);
+}
+
+@media (min-width: 1024px) {
+  .headerRow {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.eyebrowLine {
+  display: inline-block;
+  width: 26px;
+  height: 1px;
+  background-color: var(--color-orange);
+  flex-shrink: 0;
+}
+
+.eyebrow {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-orange);
+}
+
+.headline {
+  font-family: var(--font-heading);
+  font-size: clamp(1.85rem, 3.4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+.navyText {
+  color: var(--color-navy);
+}
+
+.orangeText {
+  color: var(--color-orange);
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  max-width: 340px;
+}
+
+@media (min-width: 1024px) {
+  .subtitle {
+    text-align: right;
+  }
+}
+
+/* ============ LAYOUT ============ */
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    flex-direction: row;
+    gap: clamp(32px, 4vw, 48px);
+  }
+}
+
+.serviceNav {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.serviceNav::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .serviceNav {
+    flex-direction: column;
+    flex: 0 0 280px;
+    gap: 4px;
+    overflow: visible;
+    border-right: 1px solid var(--color-border);
+    padding-right: var(--space-5);
+  }
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  text-align: left;
+  padding: 14px 18px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-color: var(--color-light);
+  color: var(--color-text-muted);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+  white-space: nowrap;
+}
+
+@media (min-width: 1024px) {
+  .navItem {
+    border-radius: 12px;
+    white-space: normal;
+  }
+}
+
+.navItem:hover {
+  color: var(--color-navy);
+}
+
+.navItem:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
+}
+
+.navItemActive {
+  background-color: rgba(255, 106, 0, 0.08);
+  border-color: rgba(255, 106, 0, 0.35);
+  color: var(--color-navy);
+}
+
+@media (min-width: 1024px) {
+  .navItemActive {
+    border-left: 3px solid var(--color-orange);
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+  }
+}
+
+.navNumber {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--color-orange);
+  flex-shrink: 0;
+}
+
+.navLabel {
+  flex: 1;
+}
+
+/* ============ CONTENT + VISUAL ============ */
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(28px, 4vw, 48px);
+  flex: 1;
+}
+
+@media (min-width: 1024px) {
+  .contentGrid {
+    grid-template-columns: minmax(0, 46fr) minmax(0, 54fr);
+    align-items: center;
+  }
+}
+
+.contentCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.serviceTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 800;
+  color: var(--color-navy);
+  margin-bottom: var(--space-2);
+}
+
+.serviceSubtitle {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-6);
+}
+
+.capabilityList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0;
+  margin: 0 0 var(--space-7);
+}
+
+.capabilityItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+.checkIcon {
+  color: var(--color-orange);
+  flex-shrink: 0;
+}
+
+/* Visual styling (hover/press/shadow) comes entirely from the shared
+   Button component (src/components/ui/Button.tsx) — this only positions it. */
+.ctaButton {
+  align-self: flex-start;
+}
+
+.visualCol {
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .navItem {
+    padding: 11px 16px;
+    font-size: 0.8125rem;
+  }
+
+  .ctaButton {
+    width: 100%;
+    justify-content: center;
+  }
+}

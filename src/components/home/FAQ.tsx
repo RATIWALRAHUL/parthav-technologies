@@ -3,10 +3,20 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FAQ_DATA } from "@/data/faq";
+import { FAQ_DATA, type FAQItem } from "@/data/faq";
 import styles from "./FAQ.module.css";
 
-export function FAQ() {
+interface FAQProps {
+  eyebrow?: string;
+  title?: string;
+  items?: FAQItem[];
+}
+
+export function FAQ({
+  eyebrow = "FREQUENTLY ASKED QUESTIONS",
+  title = "Got questions? We've got answers.",
+  items = FAQ_DATA,
+}: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleItem = (index: number) => {
@@ -15,11 +25,11 @@ export function FAQ() {
 
   return (
     <div className={styles.faqCol} id="faq">
-      <span className={styles.eyebrow}>FREQUENTLY ASKED QUESTIONS</span>
-      <h2 className={styles.headline}>Got questions? We&apos;ve got answers.</h2>
+      <span className={styles.eyebrow}>{eyebrow}</span>
+      <h2 className={styles.headline}>{title}</h2>
 
       <div className={styles.accordionList}>
-        {FAQ_DATA.map((item, index) => {
+        {items.map((item, index) => {
           const isOpen = openIndex === index;
           return (
             <div

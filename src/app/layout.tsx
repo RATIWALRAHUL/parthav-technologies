@@ -103,6 +103,7 @@ const jsonLd = {
 import { LogoPreloader } from "@/components/ui/LogoPreloader";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { FloatingChatWidget } from "@/components/chat/FloatingChatWidget";
+import { ComingSoonProvider } from "@/components/services/ComingSoonProvider";
 
 export default function RootLayout({
   children,
@@ -120,8 +121,10 @@ export default function RootLayout({
       <body>
         <LogoPreloader />
         <ScrollProgress />
-        {children}
-        <FloatingChatWidget />
+        <ComingSoonProvider>
+          {children}
+          <FloatingChatWidget />
+        </ComingSoonProvider>
       </body>
     </html>
   );

@@ -8,6 +8,13 @@
   --color-white: #FFFFFF;
   --color-light: #F7FAFD;
   --color-blue-tint: #EAF4FF;
+  --color-card-border: #DCE8F4;
+
+  /* Subtle accents (documented in CLAUDE.md §5) */
+  --color-mint-bg: #EAF9F3;
+  --color-mint-text: #16845B;
+  --color-peach-bg: #FFF1E8;
+  --color-orange-soft-border: #FFB98A;
 
   --color-text: #10243E;
   --color-text-muted: #66758A;
