@@ -19,6 +19,8 @@ export interface ComingSoonModalProps {
 const DEFAULT_DESCRIPTION =
   "We're currently preparing this service to bring you a better, more powerful solution. Be the first to know when we launch.";
 
+import { useComingSoonMutation } from "@/hooks/queries/useComingSoon";
+
 export function ComingSoonModal({
   isOpen,
   onClose,
@@ -28,10 +30,9 @@ export function ComingSoonModal({
 }: ComingSoonModalProps) {
   const shouldReduceMotion = useReducedMotion();
   const dialogRef = useRef<HTMLDivElement>(null);
+  const comingSoonMutation = useComingSoonMutation();
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -48,23 +49,23 @@ export function ComingSoonModal({
   }, [isOpen, onClose]);
 
   // Reset transient state whenever a different service opens.
+  const resetMutation = comingSoonMutation.reset;
   useEffect(() => {
     if (isOpen) {
       setEmail("");
       setConsent(false);
-      setSubmitted(false);
-      setLoading(false);
+      resetMutation();
     }
-  }, [isOpen, serviceName]);
+  }, [isOpen, serviceName, resetMutation]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (loading || !email || !consent) return;
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 700);
+    if (comingSoonMutation.isPending || !email || !consent) return;
+    comingSoonMutation.mutate({
+      email,
+      serviceName,
+      consent,
+    });
   };
 
   return (
@@ -138,7 +139,7 @@ export function ComingSoonModal({
                   </li>
                 </ul>
 
-                {submitted ? (
+                {comingSoonMutation.isSuccess ? (
                   <div className={styles.successBox} role="status">
                     <span className={styles.successIcon}>
                       <Check size={16} strokeWidth={2.5} />
@@ -147,6 +148,11 @@ export function ComingSoonModal({
                   </div>
                 ) : (
                   <form className={styles.form} onSubmit={handleSubmit} noValidate>
+                    {comingSoonMutation.isError && (
+                      <p style={{ color: "#DC2626", fontSize: "0.8125rem", margin: "0 0 8px" }} role="alert">
+                        {comingSoonMutation.error?.message || "Something went wrong. Please try again."}
+                      </p>
+                    )}
                     <div className={styles.inputRow}>
                       <label htmlFor="coming-soon-email" className={styles.srOnly}>
                         Email address
@@ -160,9 +166,13 @@ export function ComingSoonModal({
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
-                      <button type="submit" className={styles.notifyBtn} disabled={loading || !consent}>
-                        <span>{loading ? "Sending…" : "Notify Me"}</span>
-                        {!loading && <ArrowRight size={15} strokeWidth={2} />}
+                      <button
+                        type="submit"
+                        className={styles.notifyBtn}
+                        disabled={comingSoonMutation.isPending || !consent}
+                      >
+                        <span>{comingSoonMutation.isPending ? "Sending…" : "Notify Me"}</span>
+                        {!comingSoonMutation.isPending && <ArrowRight size={15} strokeWidth={2} />}
                       </button>
                     </div>
 

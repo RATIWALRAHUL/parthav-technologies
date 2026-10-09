@@ -1,5 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Inter } from "next/font/google";
+import { NavigationLoader } from "@/components/ui/NavigationLoader";
+import { LogoPreloader } from "@/components/ui/LogoPreloader";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import { FloatingChatWidget } from "@/components/chat/FloatingChatWidget";
+import { ComingSoonProvider } from "@/components/services/ComingSoonProvider";
+import { QueryProvider } from "@/components/providers/QueryProvider";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -100,11 +106,6 @@ const jsonLd = {
   ]
 };
 
-import { LogoPreloader } from "@/components/ui/LogoPreloader";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
-import { FloatingChatWidget } from "@/components/chat/FloatingChatWidget";
-import { ComingSoonProvider } from "@/components/services/ComingSoonProvider";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -119,12 +120,15 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <LogoPreloader />
-        <ScrollProgress />
-        <ComingSoonProvider>
-          {children}
-          <FloatingChatWidget />
-        </ComingSoonProvider>
+        <NavigationLoader />
+        <QueryProvider>
+          <LogoPreloader />
+          <ScrollToTop />
+          <ComingSoonProvider>
+            {children}
+            <FloatingChatWidget />
+          </ComingSoonProvider>
+        </QueryProvider>
       </body>
     </html>
   );

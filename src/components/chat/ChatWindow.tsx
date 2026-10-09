@@ -11,7 +11,7 @@ import { ChatFAQFlow } from "./ChatFAQFlow";
 import { ChatHumanSupport } from "./ChatHumanSupport";
 import { ChatAvatar } from "./ChatAvatar";
 import { CHAT_CONFIG } from "./chat.config";
-import { chatService } from "./chat.service";
+import { useSendMessageMutation } from "@/hooks/queries/useChat";
 import type { ChatMessage, ChatQuickAction } from "./chat.types";
 import type { FAQItem } from "@/data/faq";
 import styles from "./Chat.module.css";
@@ -34,6 +34,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
     "none" | "lead" | "faq" | "human" | "success"
   >("none");
   const [submittedLeadId, setSubmittedLeadId] = useState<string>("");
+  const sendMessageMutation = useSendMessageMutation();
 
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isTyping, setIsTyping] = useState(false);
@@ -108,7 +109,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
     setIsTyping(true);
 
     try {
-      const response = await chatService.sendMessage(text);
+      const response = await sendMessageMutation.mutateAsync(text);
       setIsTyping(false);
 
       const botMsg: ChatMessage = {

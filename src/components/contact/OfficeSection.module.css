@@ -1,0 +1,518 @@
+/* ============================================================
+   PARTHAV TECHNOLOGIES — OFFICE & CONTACT SECTION (2026)
+   EXACT UI RECREATION FROM REFERENCE SPECIFICATION
+   PURE CSS MODULE — NO TAILWIND / NO BOOTSTRAP
+   ============================================================ */
+
+.officeSection {
+  position: relative;
+  background-color: #FFFFFF;
+  padding: clamp(64px, 6vw, 96px) 0 clamp(80px, 8vw, 120px) 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 3.5vw, 48px);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* ------------------------------------------------------------
+   Section Header
+   ------------------------------------------------------------ */
+.headerBlock {
+  margin-bottom: clamp(36px, 4vw, 52px);
+  max-width: 640px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.8125rem; /* 13px */
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #60758C;
+  margin-bottom: 14px;
+}
+
+.eyebrowDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-orange, #FF6A00);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.headline {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 3.6vw, 50px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--color-navy, #062B57);
+  margin: 0 0 16px 0;
+}
+
+.orangeText {
+  color: var(--color-orange, #FF6A00);
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.9375rem, 1.05vw, 1.0625rem); /* 15px - 17px */
+  line-height: 1.6;
+  color: #60758C;
+  margin: 0;
+}
+
+/* ------------------------------------------------------------
+   Three Column Office Grid
+   ------------------------------------------------------------ */
+.officeGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(24px, 2.8vw, 36px);
+  align-items: stretch;
+  width: 100%;
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .officeGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mapCard {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .officeGrid {
+    grid-template-columns: 1fr 1.15fr 1.15fr;
+    gap: clamp(24px, 2.5vw, 36px);
+  }
+}
+
+/* ------------------------------------------------------------
+   Column 1: Contact Details List
+   ------------------------------------------------------------ */
+.detailsCol {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2.2vw, 26px);
+  justify-content: center;
+}
+
+.infoItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.infoIconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.infoItem:hover .infoIconBox {
+  transform: scale(1.06);
+}
+
+.peachIconBox {
+  background-color: #FFF2E8;
+  color: var(--color-orange, #FF6A00);
+}
+
+.blueIconBox {
+  background-color: #EAF4FF;
+  color: #1A60BD;
+}
+
+.infoText {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoTitle {
+  font-family: var(--font-heading);
+  font-size: 0.9375rem; /* 15px */
+  font-weight: 700;
+  color: var(--color-navy, #062B57);
+  margin: 0 0 4px 0;
+  line-height: 1.25;
+}
+
+.infoDesc {
+  font-family: var(--font-body);
+  font-size: 0.84rem; /* ~13.5px */
+  line-height: 1.5;
+  color: #60758C;
+  margin: 0;
+}
+
+.infoLink {
+  color: #60758C;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.infoLink:hover {
+  color: var(--color-orange, #FF6A00);
+}
+
+/* Social links row */
+.socialSection {
+  margin-top: 4px;
+}
+
+.socialLabel {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem; /* 13px */
+  font-weight: 700;
+  color: var(--color-navy, #062B57);
+  margin: 0 0 10px 0;
+}
+
+.socialIconsRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.socialIconBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #F1F6FC;
+  border: 1px solid #DCE8F4;
+  color: var(--color-navy, #062B57);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.socialIconBtn:hover {
+  background-color: var(--color-orange, #FF6A00);
+  border-color: var(--color-orange, #FF6A00);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* ------------------------------------------------------------
+   Column 2: Office Image Visual Card
+   ------------------------------------------------------------ */
+.imageCardCol {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(6, 43, 87, 0.08);
+  background-color: var(--color-blue-tint, #F0F4FA);
+  border: 1px solid #DCE8F4;
+}
+
+.officeImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.imageCardCol:hover .officeImg {
+  transform: scale(1.03);
+}
+
+/* Floating Location Badge */
+.officeFloatingBadge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 10px 16px;
+  box-shadow: 0 8px 24px rgba(6, 43, 87, 0.12), 0 1px 3px rgba(0, 0, 0, 0.04);
+  z-index: 2;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(6, 43, 87, 0.06);
+  transition: transform 0.2s ease;
+}
+
+.officeFloatingBadge:hover {
+  transform: translateY(-2px);
+}
+
+.badgePinIcon {
+  color: var(--color-orange, #FF6A00);
+}
+
+.badgeText {
+  display: flex;
+  flex-direction: column;
+}
+
+.badgeTitle {
+  font-family: var(--font-heading);
+  font-size: 0.875rem; /* 14px */
+  font-weight: 700;
+  color: var(--color-navy, #062B57);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.badgeSub {
+  font-family: var(--font-body);
+  font-size: 0.75rem; /* 12px */
+  color: #60758C;
+  margin: 0;
+  line-height: 1.25;
+}
+
+/* ------------------------------------------------------------
+   Column 3: Map Preview Card
+   ------------------------------------------------------------ */
+.mapCard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #DCE8F4;
+  box-shadow: 0 16px 40px rgba(6, 43, 87, 0.08);
+  background-color: #F4F8FD;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Vector map canvas background */
+.mapVectorBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* City landmark labels */
+.landmarkLabel {
+  position: absolute;
+  font-family: var(--font-heading);
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 700;
+  color: #7A90A8;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  pointer-events: none;
+  user-select: none;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 2px 6px;
+  border-radius: 4px;
+  backdrop-filter: blur(2px);
+}
+
+.landmarkDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #8CA0B8;
+}
+
+.landmarkJaipur {
+  top: 44%;
+  left: 28%;
+  font-size: 0.9375rem; /* 15px */
+  font-weight: 800;
+  color: #2F4D70;
+  background: transparent;
+  padding: 0;
+}
+
+.landmarkHindi {
+  font-size: 0.75rem;
+  color: #60758C;
+  font-weight: 500;
+}
+
+.landmarkRamgarh {
+  top: 14%;
+  left: 32%;
+}
+
+.landmarkAlbertHall {
+  top: 36%;
+  left: 34%;
+}
+
+.landmarkHawaMahal {
+  top: 48%;
+  right: 18%;
+  color: #FF6A00;
+}
+
+.landmarkHawaMahal .landmarkDot {
+  background-color: #FF6A00;
+}
+
+.landmarkBirlaMandir {
+  top: 18%;
+  right: 12%;
+}
+
+.landmarkMotiDungri {
+  bottom: 28%;
+  right: 14%;
+}
+
+/* Prominent Parthav Pin Marker */
+.parthavPinCard {
+  position: absolute;
+  top: 58%;
+  left: 38%;
+  transform: translate(-30%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 8px 14px;
+  box-shadow: 0 8px 24px rgba(6, 43, 87, 0.16);
+  border: 1px solid rgba(255, 106, 0, 0.25);
+  z-index: 2;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.parthavPinCard:hover {
+  transform: translate(-30%, -52%);
+  box-shadow: 0 12px 28px rgba(255, 106, 0, 0.25);
+}
+
+.pinIconCircle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF7A00 0%, #FF5500 100%);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(255, 106, 0, 0.4);
+}
+
+.pinInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.pinTitle {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem; /* 13px */
+  font-weight: 800;
+  color: var(--color-navy, #062B57);
+  line-height: 1.2;
+}
+
+.pinSub {
+  font-family: var(--font-body);
+  font-size: 0.6875rem; /* 11px */
+  color: #60758C;
+  line-height: 1.2;
+}
+
+/* Bottom Directions Button */
+.directionsBtn {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #FFFFFF;
+  color: var(--color-navy, #062B57);
+  border: 1px solid #DCE8F4;
+  border-radius: 9999px;
+  padding: 12px 20px;
+  font-family: var(--font-heading);
+  font-size: 0.875rem; /* 14px */
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(6, 43, 87, 0.08);
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.directionsBtn:hover {
+  background-color: var(--color-navy, #062B57);
+  border-color: var(--color-navy, #062B57);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(6, 43, 87, 0.16);
+}
+
+.directionsIcon {
+  color: var(--color-orange, #FF6A00);
+  transition: color 0.2s ease;
+}
+
+.directionsBtn:hover .directionsIcon {
+  color: #FFFFFF;
+}
+
+/* ------------------------------------------------------------
+   Responsive adjustments
+   ------------------------------------------------------------ */
+@media (max-width: 767px) {
+  .officeSection {
+    padding: 56px 0 72px 0;
+  }
+
+  .headline {
+    font-size: clamp(28px, 7vw, 36px);
+  }
+
+  .imageCardCol,
+  .mapCard {
+    min-height: 280px;
+  }
+
+  .parthavPinCard {
+    left: 45%;
+  }
+}

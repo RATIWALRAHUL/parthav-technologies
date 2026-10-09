@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowRight, Menu, Phone, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Menu, Phone, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 import { Container } from "@/components/ui/Container";
@@ -21,9 +21,25 @@ export function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState(() =>
-    pathname === "/services" ? "Services" : "Home"
-  );
+  const [activeSection, setActiveSection] = useState(() => {
+    if (pathname.startsWith("/services")) return "Services";
+    if (pathname === "/about") return "About Us";
+    if (pathname === "/contact") return "Contact";
+    return "Home";
+  });
+
+  // Keep activeSection in sync with pathname changes
+  useEffect(() => {
+    if (pathname.startsWith("/services")) {
+      setActiveSection("Services");
+    } else if (pathname === "/about") {
+      setActiveSection("About Us");
+    } else if (pathname === "/contact") {
+      setActiveSection("Contact");
+    } else if (pathname === "/") {
+      setActiveSection("Home");
+    }
+  }, [pathname]);
 
   // Track scroll position for elevated header styling
   useEffect(() => {
@@ -76,10 +92,11 @@ export function Navbar() {
 
     // Already on the target page: smooth-scroll instead of a full navigation.
     if (targetPath === pathname) {
-      e.preventDefault();
       if (hrefHash) {
+        e.preventDefault();
         document.getElementById(hrefHash)?.scrollIntoView({ behavior: "smooth" });
       } else {
+        // If clicking same page link without hash, scroll to top
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     }
@@ -118,17 +135,24 @@ export function Navbar() {
             <ul className={styles.navMenu}>
               {NAV_ITEMS.map((item) => {
                 const isActive = activeSection === item.label;
+                const hasChildren = Boolean(item.children && item.children.length > 0);
+
                 return (
-                  <li key={item.label}>
+                  <li key={item.label} className={hasChildren ? styles.navItemWrapper : undefined}>
                     <Link
                       href={item.href}
                       className={clsx(
                         styles.navLink,
+                        hasChildren && styles.navLinkWithChevron,
                         isActive && styles.activeLink
                       )}
                       onClick={(e) => handleNavClick(e, item.label, item.href)}
+                      aria-haspopup={hasChildren ? "true" : undefined}
                     >
-                      {item.label}
+                      <span>{item.label}</span>
+                      {hasChildren && (
+                        <ChevronDown size={14} className={styles.dropdownChevron} />
+                      )}
                       {isActive && (
                         <motion.span
                           layoutId="navActiveIndicator"
@@ -142,6 +166,25 @@ export function Navbar() {
                         />
                       )}
                     </Link>
+
+                    {hasChildren && (
+                      <div className={styles.dropdownMenu} role="menu">
+                        {item.children!.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className={styles.dropdownItem}
+                            role="menuitem"
+                            onClick={(e) => handleNavClick(e, item.label, child.href)}
+                          >
+                            <span className={styles.dropdownItemTitle}>{child.label}</span>
+                            {child.description && (
+                              <span className={styles.dropdownItemDesc}>{child.description}</span>
+                            )}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </li>
                 );
               })}
@@ -209,6 +252,8 @@ export function Navbar() {
               <ul className={styles.mobileNavList}>
                 {NAV_ITEMS.map((item, index) => {
                   const isActive = activeSection === item.label;
+                  const hasChildren = Boolean(item.children && item.children.length > 0);
+
                   return (
                     <motion.li
                       key={item.label}
@@ -236,6 +281,28 @@ export function Navbar() {
                           />
                         )}
                       </Link>
+
+                      {hasChildren && (
+                        <ul className={styles.mobileSubList}>
+                          {item.children!.map((child) => {
+                            const isChildActive = pathname === child.href;
+                            return (
+                              <li key={child.href}>
+                                <Link
+                                  href={child.href}
+                                  className={clsx(
+                                    styles.mobileSubLink,
+                                    isChildActive && styles.mobileSubLinkActive
+                                  )}
+                                  onClick={(e) => handleNavClick(e, item.label, child.href)}
+                                >
+                                  {child.label}
+                                </Link>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      )}
                     </motion.li>
                   );
                 })}

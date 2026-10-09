@@ -2,7 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
-import { Search, PenTool, ShieldCheck, Handshake } from "lucide-react";
+import Link from "next/link";
+import { Search, PenTool, ShieldCheck, Handshake, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
@@ -66,6 +67,24 @@ export function AboutPreview() {
                   <p className={styles.valueDesc}>{val.description}</p>
                 </motion.div>
               ))}
+            </div>
+
+            <div style={{ marginTop: "var(--space-6)" }}>
+              <Link
+                href="/about"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  fontFamily: "var(--font-heading)",
+                  fontSize: "0.9375rem",
+                  fontWeight: 600,
+                  color: "var(--color-orange)",
+                  textDecoration: "none",
+                }}
+              >
+                Learn more about our studio & story <ArrowRight size={15} />
+              </Link>
             </div>
           </div>
         </div>

@@ -1,0 +1,225 @@
+.selectContainer {
+  position: relative;
+  width: 100%;
+}
+
+.triggerButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 48px;
+  background: #FFFFFF;
+  border: 1px solid #DCE8F4;
+  border-radius: 12px;
+  padding: 12px 14px 12px 42px;
+  font-family: var(--font-body);
+  font-size: 0.875rem; /* 14px */
+  color: var(--color-navy, #062B57);
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.triggerButton:hover:not(:disabled) {
+  border-color: #BACEE3;
+}
+
+.triggerButton:focus-visible,
+.triggerOpen {
+  border-color: var(--color-orange, #FF6A00) !important;
+  box-shadow: 0 0 0 3px rgba(255, 106, 0, 0.14) !important;
+}
+
+.triggerError {
+  border-color: #E53E3E !important;
+  background-color: #FFF5F5 !important;
+}
+
+.triggerButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.leadingIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8C9EAF;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.triggerOpen .leadingIcon,
+.triggerButton:focus .leadingIcon {
+  color: var(--color-orange, #FF6A00);
+}
+
+.selectedValue {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+  color: var(--color-navy, #062B57);
+}
+
+.hasValue {
+  font-weight: 600;
+  color: var(--color-navy, #062B57);
+}
+
+.placeholder {
+  color: #9AAEC2;
+  font-weight: 400;
+}
+
+.chevronIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8C9EAF;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s ease;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+  color: var(--color-orange, #FF6A00);
+}
+
+/* Floating Label for Select */
+.floatingLabel {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 42px;
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #7A8FA5;
+  pointer-events: none;
+  transition:
+    top 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    left 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    font-size 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.2s ease,
+    background-color 0.2s ease,
+    padding 0.2s ease;
+  white-space: nowrap;
+  line-height: 1;
+  z-index: 2;
+}
+
+.floatingLabelActive {
+  top: 0;
+  transform: translateY(-50%);
+  left: 14px;
+  font-size: 0.71875rem; /* ~11.5px */
+  font-weight: 700;
+  color: var(--color-navy, #062B57);
+  background: #FFFFFF;
+  padding: 0 6px;
+  border-radius: 4px;
+}
+
+.floatingLabelFocused {
+  color: var(--color-orange, #FF6A00) !important;
+}
+
+/* Floating Custom Dropdown Menu */
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: #FFFFFF;
+  border: 1px solid rgba(6, 43, 87, 0.12);
+  border-radius: 14px;
+  box-shadow:
+    0 16px 36px -6px rgba(6, 43, 87, 0.16),
+    0 4px 12px rgba(6, 43, 87, 0.05);
+  padding: 6px;
+  max-height: 270px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(6, 43, 87, 0.2) transparent;
+}
+
+.dropdownMenu::-webkit-scrollbar {
+  width: 5px;
+}
+
+.dropdownMenu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dropdownMenu::-webkit-scrollbar-thumb {
+  background-color: rgba(6, 43, 87, 0.2);
+  border-radius: 9999px;
+}
+
+.dropdownMenu::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-orange, #FF6A00);
+}
+
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.optionItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.84375rem; /* 13.5px */
+  color: #1E3A5F;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  user-select: none;
+}
+
+.optionItem:hover,
+.optionHighlighted {
+  background-color: #FFF5ED;
+  color: var(--color-orange, #FF6A00);
+}
+
+.optionSelected {
+  background-color: #FFF0E2 !important;
+  color: var(--color-orange, #FF6A00) !important;
+  font-weight: 700;
+}
+
+.optionText {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.checkIcon {
+  color: var(--color-orange, #FF6A00);
+  flex-shrink: 0;
+  margin-left: 8px;
+}

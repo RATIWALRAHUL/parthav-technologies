@@ -1,0 +1,810 @@
+.aboutPage {
+  min-height: 100vh;
+  background-color: var(--color-white);
+  color: var(--color-charcoal);
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   GLOBAL SECTION SPACING & HEADERS (Consistent Rhythm)
+   ========================================================================== */
+.sectionTag {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-orange);
+  margin-bottom: 10px;
+}
+
+.sectionHeading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.8vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.18;
+  color: var(--color-navy);
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+}
+
+.sectionHeaderCenter {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto clamp(40px, 5.5vw, 60px);
+}
+
+.sectionHeaderCenter .sectionHeading {
+  margin-bottom: 14px;
+}
+
+.sectionSubtitle {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--color-slate);
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   2. Proof / Capability Strip (4 Compact Cards)
+   ========================================================================== */
+.proofSection {
+  padding: clamp(40px, 4.5vw, 56px) 0;
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.proofGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .proofGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .proofGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.proofCard {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 16px rgba(6, 43, 87, 0.04);
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  height: 100%;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+.proofCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(6, 43, 87, 0.08);
+  border-color: rgba(255, 106, 0, 0.35);
+}
+
+.proofIconBox {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.proofContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.proofTitle {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.proofDesc {
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--color-slate);
+  margin: 0;
+}
+
+/* ==========================================================================
+   3. Founding Story Section (Matches Reference)
+   ========================================================================== */
+.storySection {
+  padding: clamp(80px, 7vw, 108px) 0;
+  background-color: var(--color-white);
+}
+
+.storyGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: clamp(40px, 5.5vw, 68px);
+}
+
+@media (min-width: 1024px) {
+  .storyGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.storyMediaCard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 20px 48px -12px rgba(6, 43, 87, 0.16);
+  border: 1px solid var(--color-border);
+}
+
+.storyImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.storyFloatingBadge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(3, 27, 58, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--color-white);
+  padding: 8px 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+.storyBadgeText {
+  display: flex;
+  flex-direction: column;
+}
+
+.storyBadgeTitle {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1.2;
+}
+
+.storyBadgeSub {
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.storyParagraph {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--color-slate);
+  margin-bottom: var(--space-4);
+}
+
+.storyPrinciplesRow {
+  margin-top: var(--space-6);
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  gap: var(--space-3);
+}
+
+@media (min-width: 640px) {
+  .storyPrinciplesRow {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.storyPrincipleItem {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 100%;
+  box-shadow: 0 2px 8px rgba(6, 43, 87, 0.03);
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.storyPrincipleItem:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 106, 0, 0.3);
+}
+
+.principleHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.principleNum {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--color-orange);
+}
+
+.principleTitle {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.principleDesc {
+  font-family: var(--font-body);
+  font-size: 0.775rem;
+  line-height: 1.48;
+  color: var(--color-slate);
+  flex-grow: 1;
+}
+
+/* ==========================================================================
+   4. Mission + Vision (Two Large Side-by-Side Cards)
+   ========================================================================== */
+.missionVisionSection {
+  padding: clamp(80px, 7vw, 108px) 0;
+  background-color: var(--color-bg-light);
+}
+
+.missionVisionGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  gap: clamp(24px, 3.5vw, 36px);
+}
+
+@media (min-width: 768px) {
+  .missionVisionGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.missionCard {
+  position: relative;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 22px;
+  padding: clamp(36px, 4.5vw, 48px);
+  box-shadow: 0 6px 24px rgba(6, 43, 87, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+  height: 100%;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.missionCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(6, 43, 87, 0.09);
+}
+
+.visionCard {
+  position: relative;
+  background-color: #031B3A;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  padding: clamp(36px, 4.5vw, 48px);
+  box-shadow: 0 16px 36px rgba(3, 27, 58, 0.3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+  height: 100%;
+  color: var(--color-white);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.visionCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 44px rgba(3, 27, 58, 0.4);
+}
+
+.cardWatermark {
+  position: absolute;
+  top: 16px;
+  right: 28px;
+  font-family: var(--font-heading);
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.missionCard .cardWatermark {
+  color: rgba(6, 43, 87, 0.04);
+}
+
+.visionCard .cardWatermark {
+  color: rgba(255, 255, 255, 0.04);
+}
+
+.mvHeaderRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: var(--space-4);
+}
+
+.mvIconBox {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background-color: rgba(255, 106, 0, 0.12);
+  color: var(--color-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mvBadgeNum {
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-slate);
+}
+
+.visionCard .mvBadgeNum {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.mvTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 2.5vw, 1.85rem);
+  font-weight: 800;
+  color: var(--color-navy);
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.visionCard .mvTitle {
+  color: var(--color-white);
+}
+
+.mvText {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--color-slate);
+}
+
+.visionCard .mvText {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ==========================================================================
+   5. Principles Section (HOW WE WORK)
+   ========================================================================== */
+.principlesSection {
+  padding: clamp(80px, 7vw, 108px) 0;
+  background-color: var(--color-white);
+}
+
+.principlesGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  gap: var(--space-5);
+}
+
+@media (min-width: 640px) {
+  .principlesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .principlesGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.principleCard {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  padding: 30px 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0 4px 18px rgba(6, 43, 87, 0.05);
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.principleCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 106, 0, 0.4);
+  box-shadow: 0 16px 36px rgba(6, 43, 87, 0.09);
+}
+
+.principleTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.principleIconWrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background-color: rgba(6, 43, 87, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-navy);
+  transition: all var(--transition-fast);
+}
+
+.principleCard:hover .principleIconWrapper {
+  background-color: var(--color-orange);
+  color: var(--color-white);
+}
+
+.principleNumberWatermark {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-slate);
+  opacity: 0.7;
+}
+
+.principleCardTitle {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 10px;
+}
+
+.principleCardDesc {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.62;
+  color: var(--color-slate);
+  flex-grow: 1;
+}
+
+/* ==========================================================================
+   6. Why Parthav — Dark Section (#031B3A)
+   ========================================================================== */
+.whyParthavDarkSection {
+  padding: clamp(80px, 7vw, 108px) 0;
+  background-color: #031B3A;
+  color: var(--color-white);
+}
+
+.whyHeaderGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  margin-bottom: clamp(40px, 5.5vw, 60px);
+}
+
+@media (min-width: 1024px) {
+  .whyHeaderGrid {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: flex-end;
+  }
+}
+
+.whyDarkHeading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.8vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.18;
+  color: var(--color-white);
+  letter-spacing: -0.025em;
+}
+
+.whyDarkSubtitle {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.whyCardsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  gap: var(--space-5);
+}
+
+@media (min-width: 640px) {
+  .whyCardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .whyCardsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.whyDarkCard {
+  background-color: #062B57;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 30px 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all var(--transition-normal);
+}
+
+.whyDarkCard:hover {
+  background-color: #083468;
+  border-color: rgba(255, 106, 0, 0.45);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+}
+
+.whyDarkIconBox {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background-color: rgba(255, 106, 0, 0.14);
+  color: var(--color-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.whyDarkCardTitle {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 10px;
+}
+
+.whyDarkCardDesc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: #B8C8D9;
+  flex-grow: 1;
+}
+
+/* ==========================================================================
+   7. Core Capabilities (WHAT WE BUILD)
+   ========================================================================== */
+.capabilitiesSection {
+  padding: clamp(80px, 7vw, 108px) 0;
+  background-color: var(--color-white);
+}
+
+.capsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  gap: var(--space-5);
+}
+
+@media (min-width: 640px) {
+  .capsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .capsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.capCard {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  padding: 32px 26px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 4px 18px rgba(6, 43, 87, 0.05);
+  transition: all var(--transition-normal);
+}
+
+.capCard:hover {
+  border-color: var(--color-orange);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(6, 43, 87, 0.1);
+}
+
+.capIconBox {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.capTitle {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 10px;
+}
+
+.capDesc {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.62;
+  color: var(--color-slate);
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.capLinkText {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-orange);
+  margin-top: auto;
+  transition: gap var(--transition-fast);
+}
+
+.capCard:hover .capLinkText {
+  gap: 10px;
+}
+
+/* ==========================================================================
+   8. Technology Section (OUR TECHNOLOGY)
+   ========================================================================== */
+.techSection {
+  padding: clamp(80px, 7vw, 108px) 0;
+  background-color: var(--color-bg-light);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.techGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: stretch;
+  gap: 14px;
+}
+
+@media (min-width: 640px) {
+  .techGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .techGrid {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+
+.techCard {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 18px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  height: 100%;
+  min-height: 104px;
+  box-shadow: 0 2px 8px rgba(6, 43, 87, 0.03);
+  transition: all var(--transition-fast);
+}
+
+.techCard:hover {
+  border-color: var(--color-orange);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(6, 43, 87, 0.08);
+}
+
+.techName {
+  font-family: var(--font-heading);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+/* ==========================================================================
+   9. Jaipur → World (ROOTED IN JAIPUR)
+   ========================================================================== */
+.jaipurWorldSection {
+  padding: clamp(80px, 7vw, 108px) 0;
+  background-color: var(--color-white);
+}
+
+.jaipurWorldGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: clamp(40px, 5.5vw, 68px);
+}
+
+@media (min-width: 1024px) {
+  .jaipurWorldGrid {
+    grid-template-columns: 0.95fr 1.05fr;
+  }
+}
+
+.jaipurWorldMedia {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 16px 36px rgba(6, 43, 87, 0.08);
+  background-color: #FAF8F5;
+}
+
+.jaipurWorldImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ==========================================================================
+   Accessibility & Reduced Motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .storyImage,
+  .proofCard,
+  .storyPrincipleItem,
+  .missionCard,
+  .visionCard,
+  .principleCard,
+  .whyDarkCard,
+  .capCard,
+  .techCard {
+    transition: none !important;
+    transform: none !important;
+  }
+}

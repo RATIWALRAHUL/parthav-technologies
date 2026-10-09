@@ -1,0 +1,98 @@
+/* ============================================================
+   PARTHAV TECHNOLOGIES — CIRCULAR SCROLL TO TOP BUTTON (2026)
+   PURE CSS MODULE — NO TAILWIND / NO BOOTSTRAP
+   ============================================================ */
+
+.scrollTopButton {
+  position: fixed;
+  bottom: 96px;
+  right: 28px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(6, 43, 87, 0.08);
+  box-shadow: 0 4px 20px rgba(6, 43, 87, 0.12), 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9980;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+}
+
+.scrollTopButton:hover {
+  background: #FFFFFF;
+  border-color: rgba(255, 106, 0, 0.35);
+  box-shadow: 0 8px 24px rgba(255, 106, 0, 0.22), 0 2px 6px rgba(6, 43, 87, 0.08);
+}
+
+.scrollTopButton:focus-visible {
+  outline: 2px solid var(--color-orange, #FF6A00);
+  outline-offset: 3px;
+}
+
+.scrollTopButton:active {
+  transform: scale(0.94);
+}
+
+/* SVG Circular Ring */
+.progressSvg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+/* Background subtle circle track */
+.progressTrack {
+  stroke: rgba(6, 43, 87, 0.08);
+  stroke-width: 3.5px;
+  fill: none;
+}
+
+/* Dynamic orange progress stroke */
+.progressCircle {
+  stroke: url(#scrollProgressGradient);
+  stroke-width: 3.5px;
+  stroke-linecap: round;
+  fill: none;
+}
+
+/* Center Arrow Icon */
+.iconWrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-navy, #062B57);
+  transition: color 0.22s ease, transform 0.22s ease;
+}
+
+.scrollTopButton:hover .iconWrapper {
+  color: var(--color-orange, #FF6A00);
+  transform: translateY(-2px);
+}
+
+/* Responsive adjustment for tablets & mobile */
+@media (max-width: 768px) {
+  .scrollTopButton {
+    bottom: 88px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+  }
+}

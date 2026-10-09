@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Search, Compass, PenTool, Code2, Rocket, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import clsx from "clsx";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { PROCESS_STEPS, type ProcessStep } from "@/data/process";
@@ -37,6 +38,11 @@ export function Process({
   steps = PROCESS_STEPS,
   cta,
 }: ProcessProps) {
+  const [hoveredStep, setHoveredStep] = useState<number | null>(null);
+  const [selectedStep, setSelectedStep] = useState<number>(0);
+
+  const activeIndex = hoveredStep !== null ? hoveredStep : selectedStep;
+
   return (
     <section id="process" className={styles.processSection} aria-label="Our 5-Step Process">
       <Container>
@@ -62,67 +68,86 @@ export function Process({
           </div>
         </div>
 
-        {/* 5 Steps Grid with Connecting Line */}
+        {/* 5 Steps Grid with Process-based Glow */}
         <div className={styles.processContainer}>
-          {/* Desktop Connecting Line */}
-          <div className={styles.lineTrack} aria-hidden="true">
-            <motion.div
-              className={styles.lineProgress}
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-            />
-          </div>
-
           <div className={styles.stepsGrid}>
-            {steps.map((step, index) => (
-              <motion.div
-                key={step.step}
-                className={styles.stepCard}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{
-                  duration: 0.55,
-                  delay: index * 0.12,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
-                <div className={styles.stepTop}>
-                  <motion.span
-                    className={styles.stepIconBox}
-                    aria-hidden="true"
-                    initial={{ opacity: 0, scale: 0.85 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      duration: 0.4,
-                      delay: index * 0.12 + 0.08,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                  >
-                    {STEP_ICONS[step.iconName]}
-                  </motion.span>
-                  <span className={styles.stepNum}>{step.step}</span>
-                </div>
+            {steps.map((step, index) => {
+              const isCurrent = activeIndex === index;
+              const isPreceding = activeIndex > index;
+              const inProcess = activeIndex >= index;
 
-                <h3 className={styles.stepTitle}>{step.title}</h3>
-                <motion.p
-                  className={styles.stepDesc}
-                  initial={{ opacity: 0, y: 8 }}
+              return (
+                <motion.div
+                  key={step.step}
+                  role="button"
+                  tabIndex={0}
+                  className={clsx(
+                    styles.stepCard,
+                    isCurrent && styles.stepCardCurrent,
+                    isPreceding && styles.stepCardPreceding,
+                    inProcess && styles.stepCardInProcess
+                  )}
+                  onMouseEnter={() => setHoveredStep(index)}
+                  onMouseLeave={() => setHoveredStep(null)}
+                  onClick={() => setSelectedStep(index)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSelectedStep(index);
+                    }
+                  }}
+                  initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: "-40px" }}
                   transition={{
-                    duration: 0.4,
-                    delay: index * 0.12 + 0.14,
+                    duration: 0.5,
+                    delay: index * 0.08,
                     ease: [0.22, 1, 0.36, 1],
                   }}
+                  aria-label={`Step ${step.step}: ${step.title}`}
                 >
-                  {step.description}
-                </motion.p>
-              </motion.div>
-            ))}
+                  {/* Luminous Top Glow Beam */}
+                  <div
+                    className={clsx(
+                      styles.cardGlowBeam,
+                      isCurrent && styles.cardGlowBeamCurrent,
+                      isPreceding && styles.cardGlowBeamPreceding
+                    )}
+                    aria-hidden="true"
+                  />
+
+                  <div className={styles.stepTop}>
+                    <motion.span
+                      className={clsx(
+                        styles.stepIconBox,
+                        isCurrent && styles.stepIconBoxCurrent,
+                        isPreceding && styles.stepIconBoxPreceding
+                      )}
+                      aria-hidden="true"
+                      animate={
+                        isCurrent
+                          ? { scale: [1, 1.08, 1] }
+                          : { scale: 1 }
+                      }
+                      transition={{ duration: 0.3 }}
+                    >
+                      {STEP_ICONS[step.iconName]}
+                    </motion.span>
+                    <span
+                      className={clsx(
+                        styles.stepNum,
+                        inProcess && styles.stepNumActive
+                      )}
+                    >
+                      {step.step}
+                    </span>
+                  </div>
+
+                  <h3 className={styles.stepTitle}>{step.title}</h3>
+                  <p className={styles.stepDesc}>{step.description}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
 

@@ -12,9 +12,11 @@ const MIN_DETAILS_LENGTH = 20;
 
 type FieldErrors = Partial<Record<"name" | "email" | "details" | "consent", string>>;
 
+import { useContactMutation } from "@/hooks/queries/useContact";
+import { CustomSelect } from "@/components/ui/CustomSelect";
+
 export function Contact() {
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const contactMutation = useContactMutation();
   const [errors, setErrors] = useState<FieldErrors>({});
   const [formData, setFormData] = useState({
     name: "",
@@ -55,18 +57,13 @@ export function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (loading) return;
+    if (contactMutation.isPending) return;
 
     const fieldErrors = validate();
     setErrors(fieldErrors);
     if (Object.keys(fieldErrors).length > 0) return;
 
-    setLoading(true);
-    // Simulate brief client submission
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 800);
+    contactMutation.mutate(formData);
   };
 
   return (
@@ -143,16 +140,49 @@ export function Contact() {
           {/* Right Form Card */}
           <Reveal direction="up" delay={0.25}>
             <div className={styles.formCard}>
-              {submitted ? (
+              {contactMutation.isSuccess ? (
                 <div className={styles.successMsg} role="status">
                   <CheckCircle2 size={36} color="#0D7A53" style={{ marginBottom: "12px", display: "inline-block" }} />
                   <h3 style={{ fontFamily: "var(--font-heading)", fontSize: "1.25rem", color: "#0D7A53", marginBottom: "8px" }}>
                     Thanks — your message has been received.
                   </h3>
                   <p>We&apos;ll get back to you within 24 hours.</p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      contactMutation.reset();
+                      setFormData({
+                        name: "",
+                        email: "",
+                        company: "",
+                        phone: "",
+                        projectType: "UI/UX & Product Design",
+                        budget: "$5,000 - $15,000",
+                        details: "",
+                        consent: false,
+                      });
+                    }}
+                    style={{
+                      marginTop: "16px",
+                      padding: "8px 16px",
+                      backgroundColor: "transparent",
+                      border: "1px solid #0D7A53",
+                      borderRadius: "6px",
+                      color: "#0D7A53",
+                      fontWeight: 600,
+                      cursor: "pointer",
+                    }}
+                  >
+                    Send Another Brief
+                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className={styles.formGrid} noValidate>
+                  {contactMutation.isError && (
+                    <div style={{ color: "#DC2626", backgroundColor: "#FEE2E2", padding: "10px 14px", borderRadius: "6px", fontSize: "0.875rem" }} role="alert">
+                      {contactMutation.error?.message || "An error occurred while submitting. Please try again."}
+                    </div>
+                  )}
                   <div className={styles.twoCols}>
                     <div className={styles.formGroup}>
                       <label htmlFor="contact-name" className={styles.label}>
@@ -234,35 +264,37 @@ export function Contact() {
                       <label htmlFor="contact-projectType" className={styles.label}>
                         Project Type
                       </label>
-                      <select
+                      <CustomSelect
                         id="contact-projectType"
-                        className={styles.select}
+                        name="projectType"
                         value={formData.projectType}
                         onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                      >
-                        <option value="UI/UX & Product Design">UI/UX & Product Design</option>
-                        <option value="Web Development">Web & App Development</option>
-                        <option value="SEO & Digital Growth">SEO & Digital Growth</option>
-                        <option value="AI & Automation">AI & Automation Solutions</option>
-                        <option value="Full Enterprise Suite">Full Enterprise Suite</option>
-                      </select>
+                        options={[
+                          "UI/UX & Product Design",
+                          "Web Development",
+                          "SEO & Digital Growth",
+                          "AI & Automation",
+                          "Full Enterprise Suite",
+                        ]}
+                      />
                     </div>
 
                     <div className={styles.formGroup}>
                       <label htmlFor="contact-budget" className={styles.label}>
                         Budget Range
                       </label>
-                      <select
+                      <CustomSelect
                         id="contact-budget"
-                        className={styles.select}
+                        name="budget"
                         value={formData.budget}
                         onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                      >
-                        <option value="Under $5,000">Under $5,000 / ₹3.5L</option>
-                        <option value="$5,000 - $15,000">$5,000 – $15,000 / ₹4L – ₹12L</option>
-                        <option value="$15,000 - $30,000">$15,000 – $30,000 / ₹12L – ₹25L</option>
-                        <option value="$30,000+">$30,000+ / ₹25L+</option>
-                      </select>
+                        options={[
+                          "Under $5,000",
+                          "$5,000 - $15,000",
+                          "$15,000 - $30,000",
+                          "$30,000+",
+                        ]}
+                      />
                     </div>
                   </div>
 
@@ -311,9 +343,9 @@ export function Contact() {
                   <button
                     type="submit"
                     className={styles.submitBtn}
-                    disabled={loading}
+                    disabled={contactMutation.isPending}
                   >
-                    <span>{loading ? "Sending Brief..." : "Send Project Brief"}</span>
+                    <span>{contactMutation.isPending ? "Sending Brief..." : "Send Project Brief"}</span>
                     <ArrowRight size={18} strokeWidth={2.2} />
                   </button>
                 </form>

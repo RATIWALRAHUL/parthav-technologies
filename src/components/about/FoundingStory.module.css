@@ -1,0 +1,420 @@
+/* ============================================================
+   PARTHAV TECHNOLOGIES — FOUNDING STORY SECTION (2026)
+   EXACT UI RECREATION FROM REFERENCE SPECIFICATION
+   PURE CSS MODULE — NO TAILWIND / NO BOOTSTRAP
+   ============================================================ */
+
+.foundingSection {
+  position: relative;
+  background-color: #FFFFFF;
+  padding: clamp(72px, 6.5vw, 110px) 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* ------------------------------------------------------------
+   Ambient Background Decorations (Strictly Behind Content)
+   ------------------------------------------------------------ */
+.ambientDecor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ambientGlow {
+  position: absolute;
+  top: 15%;
+  left: 10%;
+  width: 55vw;
+  height: 55vw;
+  max-width: 700px;
+  max-height: 700px;
+  background: radial-gradient(circle, rgba(214, 234, 255, 0.35) 0%, rgba(255, 255, 255, 0) 70%);
+  filter: blur(50px);
+}
+
+.shapeTopRight {
+  position: absolute;
+  top: -40px;
+  right: -50px;
+  width: 320px;
+  height: 320px;
+  background: linear-gradient(135deg, rgba(234, 244, 255, 0.75) 0%, rgba(218, 235, 255, 0.3) 100%);
+  border-radius: 64px;
+  transform: rotate(25deg);
+  opacity: 0.85;
+}
+
+.shapeLeft {
+  position: absolute;
+  top: 20%;
+  left: -80px;
+  width: 420px;
+  height: 420px;
+  background: linear-gradient(135deg, rgba(230, 242, 255, 0.5) 0%, rgba(240, 247, 255, 0.15) 100%);
+  border-radius: 80px;
+  transform: rotate(-15deg);
+  opacity: 0.7;
+}
+
+.orangeOrbitSvg {
+  position: absolute;
+  top: 4%;
+  left: -4%;
+  width: 620px;
+  height: 480px;
+  pointer-events: none;
+  opacity: 0.85;
+  transform-origin: center center;
+}
+
+/* ------------------------------------------------------------
+   Container & Grid Layout
+   ------------------------------------------------------------ */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 3.5vw, 48px);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.foundingGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(36px, 4vw, 56px);
+  align-items: flex-start;
+  width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .foundingGrid {
+    grid-template-columns: minmax(0, 46%) minmax(0, 54%);
+    gap: clamp(40px, 4vw, 64px);
+  }
+}
+
+/* ------------------------------------------------------------
+   Left Column: Jaipur Visual Card & Location Badge
+   ------------------------------------------------------------ */
+.visualColumn {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .visualColumn {
+    margin-top: 24px; /* Natural slight vertical offset below the right eyebrow */
+  }
+}
+
+.imageCard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(6, 43, 87, 0.08);
+  background-color: var(--color-blue-tint, #F0F4FA);
+}
+
+.jaipurImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.imageCard:hover .jaipurImg {
+  transform: scale(1.025);
+}
+
+/* Floating Location Badge */
+.locationBadge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 12px 16px;
+  box-shadow: 0 8px 24px rgba(6, 43, 87, 0.12), 0 1px 3px rgba(0, 0, 0, 0.04);
+  z-index: 2;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(6, 43, 87, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.locationBadge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(6, 43, 87, 0.16);
+}
+
+.pinWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-orange, #FF6A00);
+  flex-shrink: 0;
+}
+
+.pinIcon {
+  color: var(--color-orange, #FF6A00);
+}
+
+.badgeText {
+  display: flex;
+  flex-direction: column;
+}
+
+.badgeTitle {
+  font-family: var(--font-heading);
+  font-size: 0.875rem; /* 14px */
+  font-weight: 700;
+  color: var(--color-navy, #062B57);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.badgeSub {
+  font-family: var(--font-body);
+  font-size: 0.75rem; /* 12px */
+  font-weight: 500;
+  color: #60758C;
+  margin: 0;
+  margin-top: 2px;
+  line-height: 1.25;
+}
+
+/* ------------------------------------------------------------
+   Right Column: Narrative Content & Principle Cards
+   ------------------------------------------------------------ */
+.contentColumn {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Eyebrow */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.8125rem; /* 13px */
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #60758C;
+  margin-bottom: 14px;
+}
+
+.eyebrowDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-orange, #FF6A00);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Headline */
+.headline {
+  font-family: var(--font-heading);
+  font-size: clamp(30px, 3.2vw, 48px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--color-navy, #062B57);
+  margin: 0 0 20px 0;
+  max-width: 620px;
+}
+
+.orangeText {
+  color: var(--color-orange, #FF6A00);
+  white-space: nowrap;
+}
+
+/* Body Paragraphs */
+.paragraph {
+  font-family: var(--font-body);
+  font-size: clamp(0.9375rem, 1.1vw, 1.0625rem); /* 15px - 17px */
+  line-height: 1.62;
+  color: #60758C;
+  margin: 0 0 18px 0;
+  max-width: 640px;
+}
+
+.paragraphLast {
+  margin-bottom: clamp(24px, 2.5vw, 32px);
+}
+
+/* ------------------------------------------------------------
+   Three Principle Cards
+   ------------------------------------------------------------ */
+.principlesGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(10px, 1.2vw, 14px);
+  width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 600px) {
+  .principlesGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(10px, 1.2vw, 14px);
+  }
+}
+
+.principleCard {
+  background: #FFFFFF;
+  border: 1px solid #DCE8F4;
+  border-radius: 16px;
+  padding: clamp(16px, 1.4vw, 20px) clamp(12px, 1.2vw, 18px);
+  box-shadow: 0 4px 18px rgba(6, 43, 87, 0.04);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  transition:
+    transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s ease;
+}
+
+.principleCard:hover {
+  transform: translateY(-3px);
+  border-color: rgba(6, 43, 87, 0.2);
+  box-shadow: 0 10px 24px rgba(6, 43, 87, 0.08);
+}
+
+.principleCard:hover .iconBox {
+  transform: scale(1.04);
+}
+
+.iconBox {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.peachIconBox {
+  background-color: #FFF2E8;
+  color: var(--color-orange, #FF6A00);
+}
+
+.blueIconBox {
+  background-color: #EAF4FF;
+  color: #1A60BD;
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(0.875rem, 1.1vw, 1rem); /* 14px - 16px */
+  font-weight: 700;
+  color: var(--color-navy, #062B57);
+  margin: 0 0 6px 0;
+  line-height: 1.25;
+  word-break: normal;
+}
+
+.cardDesc {
+  font-family: var(--font-body);
+  font-size: clamp(0.75rem, 0.9vw, 0.8125rem); /* 12px - 13px */
+  line-height: 1.45;
+  color: #60758C;
+  margin: 0;
+}
+
+/* ------------------------------------------------------------
+   Mobile & Tablet Responsive Refinements
+   ------------------------------------------------------------ */
+@media (max-width: 767px) {
+  .foundingSection {
+    padding: 56px 0;
+  }
+
+  .visualColumn {
+    margin-top: 0;
+  }
+
+  .imageCard {
+    border-radius: 20px;
+  }
+
+  .locationBadge {
+    bottom: 14px;
+    left: 14px;
+    padding: 10px 14px;
+    border-radius: 14px;
+    gap: 10px;
+  }
+
+  .badgeTitle {
+    font-size: 0.8125rem;
+  }
+
+  .badgeSub {
+    font-size: 0.6875rem;
+  }
+
+  .headline {
+    font-size: clamp(28px, 7vw, 36px);
+    line-height: 1.12;
+    margin-bottom: 16px;
+  }
+
+  .paragraph {
+    font-size: 0.9375rem;
+    margin-bottom: 16px;
+  }
+
+  .paragraphLast {
+    margin-bottom: 24px;
+  }
+
+  .principlesGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .principleCard {
+    padding: 16px;
+    min-height: auto;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .shapeTopRight,
+  .shapeLeft,
+  .orangeOrbitSvg {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .jaipurImg,
+  .principleCard,
+  .locationBadge {
+    transition: none !important;
+  }
+}

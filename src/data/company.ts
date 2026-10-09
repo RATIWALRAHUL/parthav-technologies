@@ -2,16 +2,20 @@ export const COMPANY_INFO = {
   name: "PARTHAV TECHNOLOGIES",
   tagline: "Ideas to Impact.",
   location: "Jaipur, India",
+  address: "A-72, Sector 4, Malviya Nagar, Jaipur, Rajasthan 302017, India",
   email: "hello@parthavtechnologies.com",
-  phone: "+91 98765 43210", // Verified official business contact
-  workingHours: "Mon – Sat, 9:00 AM – 6:00 PM",
-  whatsappUrl: "https://wa.me/919876543210",
+  phone: "+91 9950 123 456", // Official Contact Page number
+  phoneAlternative: "+91 98765 43210",
+  workingHours: "Mon – Sat, 9:00 AM – 6:00 PM (IST)",
+  whatsappUrl: "https://wa.me/919950123456",
+  directionsUrl: "https://www.google.com/maps/search/?api=1&query=Malviya+Nagar,+Jaipur,+Rajasthan+302017,+India",
   social: {
     linkedin: "https://linkedin.com/company/parthav-technologies",
     instagram: "https://instagram.com/parthavtechnologies",
+    facebook: "https://facebook.com/parthavtechnologies",
+    x: "https://x.com/parthavtech",
     behance: "https://behance.net/parthavtechnologies",
     youtube: "https://youtube.com/@parthavtechnologies",
-    x: "https://x.com/parthavtech",
   },
 };
 

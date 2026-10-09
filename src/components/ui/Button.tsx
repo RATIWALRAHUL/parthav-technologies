@@ -8,6 +8,7 @@ interface ButtonBaseProps {
   children: React.ReactNode;
   icon?: React.ReactNode;
   className?: string;
+  loading?: boolean;
 }
 
 type ButtonAsButton = ButtonBaseProps &
@@ -27,18 +28,21 @@ export function Button({
   children,
   icon,
   className,
+  loading = false,
   ...props
 }: ButtonProps) {
   const combinedClassName = clsx(
     styles.button,
     styles[variant],
+    loading && styles.disabled,
     className
   );
 
   const content = (
     <>
+      {loading && <span className={styles.loadingSpinner} aria-hidden="true" />}
       <span>{children}</span>
-      {icon && <span className={styles.icon}>{icon}</span>}
+      {!loading && icon && <span className={styles.icon}>{icon}</span>}
     </>
   );
 

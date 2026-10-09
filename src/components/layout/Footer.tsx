@@ -101,13 +101,13 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#about" className={styles.footerLink}>
+                  <Link href="/about" className={styles.footerLink}>
                     About Us
                   </Link>
                 </li>
                 <li>
                   <Link href="/services" className={styles.footerLink}>
-                    Services
+                    Services Overview
                   </Link>
                 </li>
                 <li>
@@ -147,13 +147,13 @@ export function Footer() {
             <div className={styles.collapsibleContent}>
               <ul className={styles.linkList}>
                 <li>
-                  <Link href="/services/ui-ux-product-design" className={styles.footerLink}>
-                    UI/UX & Product Design
+                  <Link href="/services/web-development" className={styles.footerLink}>
+                    Web Development
                   </Link>
                 </li>
                 <li>
-                  <Link href="/services/web-development" className={styles.footerLink}>
-                    Web Development
+                  <Link href="/services/ui-ux-product-design" className={styles.footerLink}>
+                    UI/UX & Product Design
                   </Link>
                 </li>
                 <li>
@@ -167,8 +167,18 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/services/branding-digital-identity" className={styles.footerLink}>
+                    Branding & Digital Identity
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/crm-business-automation" className={styles.footerLink}>
+                    CRM & Business Automation
+                  </Link>
+                </li>
+                <li>
                   <Link href="/services" className={styles.footerLink}>
-                    SaaS Engineering
+                    All Services
                   </Link>
                 </li>
               </ul>

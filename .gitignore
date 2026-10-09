@@ -47,3 +47,6 @@ coverage/
 
 # Misc
 *.log
+
+*storybook.log
+storybook-static

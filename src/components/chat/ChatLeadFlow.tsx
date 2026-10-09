@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Check, ArrowRight, Sparkles } from "lucide-react";
 import { CHAT_CONFIG } from "./chat.config";
-import { chatService } from "./chat.service";
 import type { LeadFormData } from "./chat.types";
+import { useSubmitLeadMutation } from "@/hooks/queries/useChat";
 import styles from "./Chat.module.css";
 
 interface ChatLeadFlowProps {
@@ -14,6 +14,7 @@ export const ChatLeadFlow: React.FC<ChatLeadFlowProps> = ({
   onComplete,
   onCancel,
 }) => {
+  const submitLeadMutation = useSubmitLeadMutation();
   const [step, setStep] = useState<number>(1);
   const [formData, setFormData] = useState<LeadFormData>({
     projectType: "",
@@ -25,7 +26,6 @@ export const ChatLeadFlow: React.FC<ChatLeadFlowProps> = ({
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Validate step before advancing
   const handleNext = () => {
@@ -67,16 +67,15 @@ export const ChatLeadFlow: React.FC<ChatLeadFlowProps> = ({
     }
   };
 
-  const handleSubmit = async () => {
-    setIsSubmitting(true);
-    try {
-      const res = await chatService.submitLead(formData);
-      setIsSubmitting(false);
-      onComplete(res.leadId);
-    } catch {
-      setIsSubmitting(false);
-      setErrors({ form: "Submission failed. Please try again or talk to our team." });
-    }
+  const handleSubmit = () => {
+    submitLeadMutation.mutate(formData, {
+      onSuccess: (res) => {
+        onComplete(res.leadId);
+      },
+      onError: () => {
+        setErrors({ form: "Submission failed. Please try again or talk to our team." });
+      },
+    });
   };
 
   return (
@@ -265,9 +264,9 @@ export const ChatLeadFlow: React.FC<ChatLeadFlowProps> = ({
             type="button"
             className={styles.leadNextBtn}
             onClick={handleNext}
-            disabled={isSubmitting}
+            disabled={submitLeadMutation.isPending}
           >
-            {isSubmitting ? (
+            {submitLeadMutation.isPending ? (
               <span>Submitting...</span>
             ) : (
               <>

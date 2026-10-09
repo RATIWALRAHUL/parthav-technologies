@@ -1,0 +1,325 @@
+.heroSection {
+  position: relative;
+  width: 100%;
+  background-color: var(--color-white);
+  padding-top: clamp(28px, 4.2vw, 56px);
+  padding-bottom: clamp(48px, 6vw, 76px);
+  overflow: hidden;
+}
+
+/* Complete Hero Section Background Animated Video (Exact Homepage System) */
+.heroVideoBackgroundWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.heroVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  opacity: 0.92;
+}
+
+.heroVideoOverlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, transparent 12%, transparent 88%, #FFFFFF 100%),
+    linear-gradient(to right, #FFFFFF 0%, #FFFFFF 36%, rgba(255, 255, 255, 0.84) 50%, rgba(255, 255, 255, 0.35) 70%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+.heroContainer {
+  position: relative;
+  z-index: 2;
+}
+
+/* Two Column Grid */
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: clamp(32px, 4.5vw, 56px);
+}
+
+@media (min-width: 1024px) {
+  .heroGrid {
+    grid-template-columns: minmax(0, 6.5fr) minmax(0, 3.5fr);
+    gap: clamp(32px, 4vw, 52px);
+  }
+}
+
+/* ========================================================
+   LEFT COLUMN: Eyebrow, H1, Description, CTAs
+   ======================================================== */
+.heroContent {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Eyebrow matching Homepage */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: clamp(0.75rem, 2vw, 0.8125rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-navy);
+  margin-bottom: clamp(14px, 2.5vw, 20px);
+  line-height: 1.4;
+}
+
+.eyebrowDot {
+  color: var(--color-orange);
+  font-size: 1.15em;
+  line-height: 1;
+  display: inline-block;
+}
+
+/* Headline matching Homepage Typography Hierarchy */
+.headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5.2vw, 3.85rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--color-navy);
+  margin-bottom: clamp(16px, 2.8vw, 24px);
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.headlineLine {
+  display: block;
+}
+
+.orangeText {
+  color: var(--color-orange);
+}
+
+@media (min-width: 640px) {
+  .orangeText {
+    white-space: nowrap;
+  }
+}
+
+/* Supporting Description */
+.description {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.8vw, 1.0625rem);
+  line-height: 1.65;
+  color: #60758C;
+  max-width: 620px;
+  margin-bottom: clamp(26px, 3.5vw, 36px);
+}
+
+/* CTA Group */
+.ctaGroup {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.primaryCta {
+  background-color: var(--color-orange);
+  color: #FFFFFF;
+  height: 54px;
+  padding: 0 32px;
+  border-radius: 9999px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(255, 106, 0, 0.35);
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.primaryCta:hover {
+  background-color: var(--color-orange-light);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -4px rgba(255, 106, 0, 0.45);
+}
+
+.primaryCta:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 2px;
+}
+
+.arrowIcon {
+  transition: transform 0.22s ease;
+}
+
+.primaryCta:hover .arrowIcon {
+  transform: translateX(4px);
+}
+
+.secondaryCta {
+  background-color: #FFFFFF;
+  color: var(--color-navy);
+  height: 54px;
+  padding: 0 28px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(6, 43, 87, 0.16);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.secondaryCta:hover {
+  background-color: var(--color-bg-alt);
+  border-color: var(--color-navy);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(6, 43, 87, 0.08);
+}
+
+.secondaryCta:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 2px;
+}
+
+.playIconWrapper {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(6, 43, 87, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-navy);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.secondaryCta:hover .playIconWrapper {
+  border-color: var(--color-navy);
+  background-color: rgba(6, 43, 87, 0.06);
+}
+
+/* ========================================================
+   RIGHT COLUMN: Ambient showcase space & Floating Location Badge
+   ======================================================== */
+.heroVisualSpace {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .heroVisualSpace {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: 100%;
+    min-height: 480px;
+    padding-bottom: 32px;
+    padding-right: 16px;
+  }
+}
+
+/* Dedicated Mobile/Tablet Video Card (Visible under 1024px) */
+.mobileVideoCard {
+  display: block;
+  position: relative;
+  width: 100%;
+  margin-top: 28px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(6, 43, 87, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background-color: var(--color-white);
+}
+
+@media (min-width: 1024px) {
+  .mobileVideoCard {
+    display: none;
+  }
+}
+
+.mobileVideo {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* ========================================================
+   RESPONSIVE DESIGN & REDUCED MOTION
+   ======================================================== */
+@media (max-width: 767px) {
+  .heroSection {
+    padding-top: 24px;
+    padding-bottom: 48px;
+  }
+
+  .eyebrow {
+    margin-bottom: 12px;
+  }
+
+  .headline {
+    font-size: clamp(1.85rem, 8vw, 2.6rem);
+    margin-bottom: 16px;
+  }
+
+  .description {
+    font-size: 0.975rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .ctaGroup {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .primaryCta,
+  .secondaryCta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .locationBadge {
+    padding: 8px 14px;
+    border-radius: 12px;
+  }
+
+  .locationBadgeTitle {
+    font-size: 0.875rem;
+  }
+
+  .locationBadgeSub {
+    font-size: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryCta,
+  .secondaryCta,
+  .locationBadge {
+    transition: none !important;
+  }
+
+  .primaryCta:hover,
+  .secondaryCta:hover,
+  .locationBadge:hover {
+    transform: none !important;
+  }
+}

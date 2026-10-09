@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  experimental: {
+    devtoolSegmentExplorer: false,
+  },
   webpack: (config, { dev }) => {
     if (dev) {
       config.watchOptions = {
