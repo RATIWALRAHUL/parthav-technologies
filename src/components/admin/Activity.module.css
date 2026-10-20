@@ -1,0 +1,110 @@
+/* ============================================================
+   PARTHAV TECHNOLOGIES — RECENT ACTIVITY PANEL
+   MATCHING MASTER PRD SPECIFICATION & REFERENCE IMAGE
+   ============================================================ */
+
+.activityCard {
+  background-color: #ffffff;
+  border: 1px solid #dce8f4;
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(6, 43, 87, 0.04);
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 0.9375rem; /* 15px */
+  font-weight: 700;
+  color: var(--color-navy, #062B57);
+}
+
+.viewAll {
+  font-size: 0.7188rem; /* 11.5px */
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.viewAll:hover {
+  color: #FF6A00;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.timelineItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  position: relative;
+}
+
+.iconColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.iconCircle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.lineConnector {
+  position: absolute;
+  top: 26px;
+  bottom: -10px;
+  width: 1px;
+  background-color: #e2e8f0;
+  z-index: 1;
+}
+
+.textColumn {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: 0.75rem; /* 12px per Master PRD Section 8 */
+  font-weight: 600;
+  color: var(--color-navy, #062B57);
+  line-height: 1.35;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.timestamp {
+  font-size: 0.6563rem; /* 10.5px */
+  color: #8da4be;
+  margin-top: 2px;
+}

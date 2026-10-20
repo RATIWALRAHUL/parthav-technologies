@@ -1,0 +1,121 @@
+/* ============================================================
+   PARTHAV TECHNOLOGIES — DASHBOARD CONTENT LAYOUT
+   COMPACT PROPORTIONS (20-24PX TITLE, 12-14PX GAPS)
+   MATCHING MASTER PRD SPECIFICATION & REFERENCE IMAGE
+   ============================================================ */
+
+.dashboardWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 32px;
+}
+
+/* Welcome Section */
+.welcomeRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.welcomeLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 1.375rem; /* 22px per Master PRD Section 3 */
+  font-weight: 800;
+  color: var(--color-navy, #062B57);
+  margin-bottom: 3px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 0.8125rem; /* 13px */
+  color: #60758c;
+}
+
+.highlightName {
+  color: #FF6A00;
+  font-weight: 700;
+}
+
+.brandMotif {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.motifLine {
+  width: 24px;
+  height: 2.5px;
+  background-color: #FF6A00;
+  border-radius: 2px;
+}
+
+.motifText {
+  font-family: var(--font-heading);
+  font-size: 0.7188rem; /* 11.5px */
+  font-weight: 700;
+  color: var(--color-navy, #062B57);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* 5 KPI Cards Grid in one row */
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+/* Middle Analytics Row (3 Columns: 2fr 1.5fr 1.3fr) */
+.analyticsRow {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.3fr;
+  gap: 14px;
+}
+
+/* Bottom Table Row */
+.tableRow {
+  width: 100%;
+}
+
+@media (max-width: 1400px) {
+  .analyticsRow {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 1200px) {
+  .kpiGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .kpiGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .analyticsRow {
+    grid-template-columns: 1fr;
+  }
+
+  .welcomeRow {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 540px) {
+  .kpiGrid {
+    grid-template-columns: 1fr;
+  }
+}

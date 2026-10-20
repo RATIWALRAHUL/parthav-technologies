@@ -110,7 +110,7 @@ class MockChatProvider implements ChatServiceProvider {
       return {
         message:
           "We've delivered 50+ enterprise and growth projects across FinTech, HealthTech, AI Platforms, and Luxury E-Commerce with a 4.9/5 client satisfaction rating. You can view our featured case studies on our Work page.",
-        meta: { route: "/work" },
+        meta: { route: "/#work" },
       };
     }
 
@@ -159,24 +159,31 @@ class MockChatProvider implements ChatServiceProvider {
   async submitLead(
     lead: LeadFormData
   ): Promise<{ success: boolean; leadId: string; message: string }> {
-    await new Promise((res) => setTimeout(res, 600));
-
-    // Store in localStorage for client persistence if available
     try {
-      if (typeof window !== "undefined") {
-        const existing = JSON.parse(
-          localStorage.getItem("parthav_leads") || "[]"
-        );
-        const newLead = {
-          ...lead,
-          id: `lead-${Date.now()}`,
-          submittedAt: new Date().toISOString(),
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: lead.name,
+          email: lead.email,
+          phone: lead.phone,
+          service: lead.projectType || "Web Development",
+          details: `${lead.requirements || "Chat Inquiry"}. Timeline: ${lead.timeline || "Flexible"}`,
+          source: "Chat",
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.success) {
+        return {
+          success: true,
+          leadId: data.inquiryCode || data.id,
+          message:
+            "Thanks! Your project request is on its way. Someone from our team will get back to you shortly.",
         };
-        existing.push(newLead);
-        localStorage.setItem("parthav_leads", JSON.stringify(existing));
       }
-    } catch {
-      // Ignore storage error
+    } catch (e) {
+      console.error("[ChatService Submit Error]", e);
     }
 
     return {

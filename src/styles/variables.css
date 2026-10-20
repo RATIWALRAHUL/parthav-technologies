@@ -52,4 +52,26 @@
   --space-10: 80px;
   --space-11: 96px;
   --space-12: 120px;
+
+  /* Master PRD Admin Design Tokens */
+  --admin-navy: #062B57;
+  --admin-navy-deep: #031B3A;
+  --admin-orange: #FF6A00;
+  --admin-orange-hover: #FF7A00;
+  --admin-blue-light: #EAF4FF;
+  --admin-background: #F7FAFD;
+  --admin-surface: #FFFFFF;
+  --admin-text: #062B57;
+  --admin-muted: #60758C;
+  --admin-border: #DCE8F4;
+  --admin-success: #16845B;
+  --admin-warning: #B7791F;
+  --admin-danger: #C2413B;
+  --admin-sidebar-width: 224px;
+  --admin-header-height: 58px;
+  --admin-radius-sm: 8px;
+  --admin-radius-md: 12px;
+  --admin-radius-lg: 16px;
+  --admin-shadow-card: 0 2px 10px rgba(6, 43, 87, 0.045);
+  --admin-transition: 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }

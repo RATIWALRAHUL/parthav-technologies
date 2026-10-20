@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
+import { getDb } from "@/lib/db";
 
 // Simple in-memory rate limiting map (IP -> timestamps array)
 const rateLimitMap = new Map<string, number[]>();
 const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
-const MAX_REQUESTS_PER_WINDOW = 5;
+const MAX_REQUESTS_PER_WINDOW = 10;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_PATTERN = /^[+]?[(]?[0-9]{1,4}[)]?[-\s./0-9]{6,15}$/;
@@ -69,9 +70,10 @@ export async function POST(request: Request) {
     const email = sanitize(body.email).toLowerCase();
     const company = sanitize(body.company);
     const phone = sanitize(body.phone);
-    const service = sanitize(body.service || body.projectType);
-    const budget = sanitize(body.budget);
+    const service = sanitize(body.service || body.projectType) || "Web Development";
+    const budget = sanitize(body.budget) || "Not Specified";
     const details = sanitize(body.details);
+    const source = sanitize(body.source) || "Contact Form";
 
     // 5. Validation
     if (!name || name.length < 2) {
@@ -95,35 +97,71 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!details || details.length < 10) {
+    if (!details || details.length < 5) {
       return NextResponse.json(
         {
           success: false,
-          error: "Please share a few more details about your project (at least 10 characters).",
+          error: "Please share a few details about your project requirements.",
         },
         { status: 400 }
       );
     }
 
-    // 6. Success log & response
-    const inquiryId = `pt_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+    // 6. Persistent Database write
+    const db = getDb();
+    const countRow = db.prepare("SELECT COUNT(*) as count FROM inquiries;").get() as { count: number };
+    const nextCodeNumber = countRow.count + 1;
+    const inquiryCode = `#INQ-${nextCodeNumber.toString().padStart(5, "0")}`;
+    const id = `inq_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
+    const timestampIso = new Date().toISOString();
 
-    console.info(`[Contact Form Submission] ID: ${inquiryId}`, {
+    const insertStmt = db.prepare(`
+      INSERT INTO inquiries (id, inquiry_code, name, email, phone, company, service, budget, details, source, status, created_at, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'New', ?, ?);
+    `);
+
+    insertStmt.run(
+      id,
+      inquiryCode,
       name,
       email,
-      company: company || "N/A",
-      phone: phone || "N/A",
-      service: service || "General Inquiry",
-      budget: budget || "Not Specified",
-      detailsLength: details.length,
-      timestamp: new Date().toISOString(),
+      phone || null,
+      company || null,
+      service,
+      budget,
+      details,
+      source,
+      timestampIso,
+      timestampIso
+    );
+
+    // 7. Log Activity Event
+    const activityStmt = db.prepare(`
+      INSERT INTO activities (id, actor_name, type, description, entity_type, entity_id, created_at)
+      VALUES (?, 'System', 'INQUIRY_CREATED', ?, 'Inquiry', ?, ?);
+    `);
+
+    activityStmt.run(
+      `act_${Date.now()}`,
+      `New inquiry from ${name}`,
+      id,
+      timestampIso
+    );
+
+    console.info(`[Contact Form Submission Persisted] ${inquiryCode}`, {
+      id,
+      name,
+      email,
+      service,
+      source,
     });
 
     return NextResponse.json(
       {
         success: true,
         message: "Thanks! Your inquiry has been received. Our team will review your project and get back to you shortly.",
-        id: inquiryId,
+        id,
+        inquiryCode,
       },
       { status: 200 }
     );

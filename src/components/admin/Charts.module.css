@@ -1,0 +1,321 @@
+/* ============================================================
+   PARTHAV TECHNOLOGIES — CHARTS & ANALYTICS PANELS
+   MATCHING MASTER PRD SPECIFICATION & REFERENCE IMAGE
+   ============================================================ */
+
+.chartCard {
+  background-color: #ffffff;
+  border: 1px solid #dce8f4;
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(6, 43, 87, 0.04);
+  height: 100%;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: 0.9375rem; /* 15px */
+  font-weight: 700;
+  color: var(--color-navy, #062B57);
+}
+
+.periodDropdown {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7188rem; /* 11.5px */
+  color: #60758c;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 6px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+/* Bar Chart Layout */
+.barChartContainer {
+  display: flex;
+  gap: 8px;
+  height: 165px;
+  margin-bottom: 8px;
+}
+
+.yAxis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.6563rem; /* 10.5px */
+  color: #8da4be;
+  height: 140px;
+  padding-bottom: 16px;
+  text-align: right;
+  width: 16px;
+  user-select: none;
+}
+
+.barsArea {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gridLines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.gridLine {
+  width: 100%;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.columnsRow {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 140px;
+  padding: 0 4px;
+}
+
+.barGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.barsPair {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 100%;
+}
+
+.barNavy {
+  width: 7.5px;
+  background-color: var(--color-navy, #062B57);
+  border-radius: 2px 2px 0 0;
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+.barOrange {
+  width: 7.5px;
+  background-color: #FF6A00;
+  border-radius: 2px 2px 0 0;
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+.barGroup:hover .barNavy,
+.barGroup:hover .barOrange {
+  filter: brightness(1.15);
+  transform: scaleY(1.02);
+  transform-origin: bottom;
+}
+
+.xLabel {
+  font-size: 0.6563rem; /* 10.5px */
+  color: #8da4be;
+  margin-top: 6px;
+  position: absolute;
+  bottom: -20px;
+  white-space: nowrap;
+}
+
+.barTooltip {
+  position: absolute;
+  top: -55px;
+  background-color: #031B3A;
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.6563rem;
+  box-shadow: 0 4px 12px rgba(3, 27, 58, 0.25);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.tooltipRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.dotNavy {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #60a5fa;
+}
+
+.dotOrange {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #FF6A00;
+}
+
+.legendRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 18px;
+  padding-top: 8px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7188rem;
+  color: #60758c;
+  font-weight: 500;
+}
+
+.legendDotNavy {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-navy, #062B57);
+}
+
+.legendDotOrange {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #FF6A00;
+}
+
+/* Doughnut Chart Layout */
+.doughnutContent {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.doughnutWrapper {
+  position: relative;
+  width: 124px;
+  height: 124px;
+  flex-shrink: 0;
+}
+
+.doughnutSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.donutSegment {
+  transition: stroke-width 150ms ease;
+}
+
+.donutSegment:hover {
+  stroke-width: 22;
+}
+
+.doughnutCenter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.doughnutTotal {
+  font-family: var(--font-heading);
+  font-size: 1.375rem; /* 22px */
+  font-weight: 800;
+  color: var(--color-navy, #062B57);
+  line-height: 1;
+}
+
+.doughnutLabel {
+  font-size: 0.6563rem; /* 10.5px */
+  color: #8da4be;
+  margin-top: 2px;
+}
+
+.doughnutLegend {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.donutLegendRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.7188rem; /* 11.5px */
+}
+
+.donutLegendLeft {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-navy, #062B57);
+  font-weight: 500;
+}
+
+.legendColorDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.donutServiceName {
+  white-space: nowrap;
+}
+
+.donutLegendRight {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: #60758c;
+  font-size: 0.6875rem;
+}
+
+.donutServiceCount {
+  font-weight: 700;
+  color: var(--color-navy, #062B57);
+}
+
+.donutServicePercent {
+  color: #8da4be;
+}
+
+@media (max-width: 1200px) {
+  .doughnutContent {
+    flex-direction: column;
+  }
+}

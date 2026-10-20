@@ -50,3 +50,7 @@ coverage/
 
 *storybook.log
 storybook-static
+
+# Local SQLite Database
+database/*.sqlite*
+*.sqlite*

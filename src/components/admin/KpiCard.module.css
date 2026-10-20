@@ -1,0 +1,119 @@
+/* ============================================================
+   PARTHAV TECHNOLOGIES — KPI CARD (COMPACT METRIC STRIP)
+   MATCHING MASTER PRD SPECIFICATION & REFERENCE IMAGE
+   ============================================================ */
+
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #dce8f4;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(6, 43, 87, 0.04);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  min-width: 0;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(6, 43, 87, 0.07);
+}
+
+.topRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.iconCircle {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.iconBlue {
+  background-color: #eaf4ff;
+  color: #062B57;
+}
+
+.iconOrange {
+  background-color: #fff1e8;
+  color: #FF6A00;
+}
+
+.contentCol {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.label {
+  font-size: 0.7188rem; /* 11.5px per Master PRD Section 3 */
+  font-weight: 600;
+  color: #60758c;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.value {
+  font-family: var(--font-heading);
+  font-size: 1.625rem; /* 26px per Master PRD Section 3 */
+  font-weight: 800;
+  color: #062B57;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.bottomRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+.badgeGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.pillPositive {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 700;
+  color: #16845B;
+  background-color: #f0fdf4;
+  padding: 1px 5px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.periodText {
+  font-size: 0.6563rem; /* ~10.5px */
+  color: #8da4be;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+.sparklineContainer {
+  width: 68px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.sparklineSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
