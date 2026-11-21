@@ -35,10 +35,9 @@ export function IntroLoader() {
 
     // Lock scroll without shifting layout when the scrollbar disappears.
     const html = document.documentElement;
-    const prev = { overflow: html.style.overflow, pad: html.style.paddingRight };
-    const gap = window.innerWidth - html.clientWidth;
+    const prev = { overflow: html.style.overflow, gutter: html.style.scrollbarGutter };
     html.style.overflow = "hidden";
-    if (gap > 0) html.style.paddingRight = `${gap}px`;
+    html.style.scrollbarGutter = "stable"; // keeps the scrollbar space so layout never shifts
 
     // Keep keyboard focus out of the covered site.
     const inerted = Array.from(document.body.children).filter(
@@ -49,7 +48,7 @@ export function IntroLoader() {
     const restore = () => {
       timers.forEach(clearTimeout);
       html.style.overflow = prev.overflow;
-      html.style.paddingRight = prev.pad;
+      html.style.scrollbarGutter = prev.gutter;
       inerted.forEach((el) => (el.inert = false));
     };
     const end = () => {
@@ -73,10 +72,11 @@ export function IntroLoader() {
     } else {
       skipRef.current?.focus({ preventScroll: true });
       // Time runs from navigation start, not hydration, so slow (dev) loads
-      // can't stretch the intro past MAX_MS in total.
+      // can't stretch the intro; the reveal still always plays.
       const elapsed = performance.now();
       later(open, Math.max(0, LOGO_MS - elapsed));
-      later(end, Math.max(0, MAX_MS - elapsed));
+      // Failsafe only: never cuts the reveal short, which needs LOGO_MS + OPEN_MS.
+      later(end, Math.max(MAX_MS - elapsed, LOGO_MS + OPEN_MS + 500));
     }
     return restore;
   }, []);
