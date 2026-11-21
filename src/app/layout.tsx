@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Inter } from "next/font/google";
 import { NavigationLoader } from "@/components/ui/NavigationLoader";
-import { LogoPreloader } from "@/components/ui/LogoPreloader";
+import { IntroLoader } from "@/components/ui/IntroLoader";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { FloatingChatWidget } from "@/components/chat/FloatingChatWidget";
 import { ComingSoonProvider } from "@/components/services/ComingSoonProvider";
@@ -120,9 +120,12 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <noscript>
+          <style>{`[role="dialog"][aria-label^="Loading"]{display:none}`}</style>
+        </noscript>
         <NavigationLoader />
         <QueryProvider>
-          <LogoPreloader />
+          <IntroLoader />
           <ScrollToTop />
           <ComingSoonProvider>
             {children}
